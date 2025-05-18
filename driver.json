@@ -103,7 +103,7 @@
   "Tags": []
 },
     {
-  "Name": "Line_1",
+  "Name": "Max",
   "Description": null,
   "ItemType": "Tag",
   "IsReadOnly": false,
@@ -135,7 +135,7 @@
   "Tags": []
 },
     {
-  "Name": "Line_2",
+  "Name": "Target",
   "Description": null,
   "ItemType": "Tag",
   "IsReadOnly": false,
