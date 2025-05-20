@@ -1,0 +1,167 @@
+[
+  {
+    "ConfigName": "Cấu hình 1",
+    "Config": {
+      "DecimalNum": 1,
+      "TagPath": "Local Station/Channel1/Device",
+      "Gain": 1.0,
+      "Offset": 0.0,
+      "Unit": "mil",
+      "ValueActive": 600.0,
+      "ActiveCheckHeadStraight": true,
+      "ArrowSettings": {
+        "Sensors": [
+          2
+        ],
+        "DataMax": true,
+        "ArrowChooseSensorAddCompareSettings": {
+          "Sensors": [],
+          "ConditionsValue": 5.0
+        },
+        "Zones": [
+          {
+            "FromValue": 0.0,
+            "ToValue": 4.0,
+            "ZoneName": 1
+          },
+          {
+            "FromValue": 4.1,
+            "ToValue": 6.0,
+            "ZoneName": 2
+          },
+          {
+            "FromValue": 6.1,
+            "ToValue": 10.0,
+            "ZoneName": 3
+          },
+          {
+            "FromValue": 10.1,
+            "ToValue": 17.0,
+            "ZoneName": 4
+          },
+          {
+            "FromValue": 17.1,
+            "ToValue": 100.0,
+            "ZoneName": 5
+          }
+        ],
+        "S3_S1OrS1_S3": true,
+        "CompareValue": 1.1
+      },
+      "AppleSettings": {
+        "Sensors": [],
+        "DataMax": true,
+        "Zones": [
+          {
+            "FromValue": 0.0,
+            "ToValue": 1.0,
+            "ZoneName": 1
+          },
+          {
+            "FromValue": 1.1,
+            "ToValue": 50.0,
+            "ZoneName": 2
+          }
+        ]
+      }
+    }
+  },
+  {
+    "ConfigName": "Cau hinh 2",
+    "Config": {
+      "DecimalNum": 2,
+      "TagPath": "Local Station/Channel1/Device",
+      "Gain": 1.0,
+      "Offset": 0.0,
+      "Unit": "mil",
+      "ValueActive": 600.0,
+      "ActiveCheckHeadStraight": true,
+      "ArrowSettings": {
+        "Sensors": [
+          2
+        ],
+        "DataMax": true,
+        "ArrowChooseSensorAddCompareSettings": {
+          "Sensors": [
+            1,
+            3
+          ],
+          "ConditionsValue": 10.0
+        },
+        "Zones": [
+          {
+            "FromValue": 0.0,
+            "ToValue": 5.0,
+            "ZoneName": 1
+          },
+          {
+            "FromValue": 5.1,
+            "ToValue": 8.0,
+            "ZoneName": 2
+          },
+          {
+            "FromValue": 8.1,
+            "ToValue": 12.0,
+            "ZoneName": 3
+          },
+          {
+            "FromValue": 12.1,
+            "ToValue": 18.0,
+            "ZoneName": 4
+          },
+          {
+            "FromValue": 18.1,
+            "ToValue": 90.0,
+            "ZoneName": 5
+          }
+        ],
+        "S3_S1OrS1_S3": true,
+        "CompareValue": 1.1
+      },
+      "AppleSettings": {
+        "Sensors": [],
+        "DataMax": true,
+        "Zones": [
+          {
+            "FromValue": 0.0,
+            "ToValue": 1.0,
+            "ZoneName": 1
+          },
+          {
+            "FromValue": 1.1,
+            "ToValue": 50.0,
+            "ZoneName": 2
+          }
+        ]
+      }
+    }
+  },
+  {
+    "ConfigName": "Cau hinh 3",
+    "Config": {
+      "DecimalNum": 3,
+      "TagPath": "Local Station/Channel1/Device",
+      "Gain": 1.0,
+      "Offset": 0.0,
+      "Unit": "mil",
+      "ValueActive": 800.0,
+      "ActiveCheckHeadStraight": true,
+      "ArrowSettings": {
+        "Sensors": [],
+        "DataMax": true,
+        "ArrowChooseSensorAddCompareSettings": {
+          "Sensors": [],
+          "ConditionsValue": 8.0
+        },
+        "Zones": [],
+        "S3_S1OrS1_S3": true,
+        "CompareValue": 0.0
+      },
+      "AppleSettings": {
+        "Sensors": [],
+        "DataMax": true,
+        "Zones": []
+      }
+    }
+  }
+]

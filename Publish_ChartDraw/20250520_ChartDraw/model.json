@@ -1,0 +1,17 @@
+{
+  "Operator": "ZAHADI",
+  "LogMasterSN": "LM2-586",
+  "TorqueMasterSN": "8025-5020",
+  "Date": "09 APR 25 (10:29:50)",
+  "ConsoleSN": "8018-5032",
+  "Tool": "Series Jar",
+  "JobNo": "ESSEMBLE HQ650 JAR",
+  "Series": "",
+  "ToolSN": "OSC115748A",
+  "ConnectionName": "LFJ-KM",
+  "Max": 0.0,
+  "Target": 0.0,
+  "LoggedTorque": 0.0,
+  "LogInterval": 1000,
+  "maxPoints": 25
+}

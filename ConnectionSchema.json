@@ -4,7 +4,7 @@
   "Port": 8800,
   "CommunicationMode": 0,
   "RefreshRate": 100,
-  "CreatedDate": "2025-05-18T22:33:27.3535953+07:00",
+  "CreatedDate": "2025-05-19T20:41:40.004668+07:00",
   "Username": null,
   "Password": null,
   "Childs": [
@@ -86,6 +86,28 @@
                     "IsValid": "False",
                     "DataType": "String",
                     "Address": "Retain"
+                  }
+                },
+                {
+                  "ItemType": 6,
+                  "Name": "Trigger",
+                  "Path": "Local Station/Channel1/Device1/Trigger",
+                  "Description": null,
+                  "DisplayInfo": null,
+                  "Error": null,
+                  "ConnectionStatus": 0,
+                  "Childs": [],
+                  "Properties": {
+                    "LastAddress": "DB1.DBW10",
+                    "AddressType": "Datablock",
+                    "ByteOffset": "10",
+                    "BitOffset": "0",
+                    "IsValid": "True",
+                    "IsBitAddress": "False",
+                    "DBNumber": "1",
+                    "bitOffset": "0",
+                    "DataType": "Word",
+                    "Address": "DB1.DBW10"
                   }
                 }
               ],

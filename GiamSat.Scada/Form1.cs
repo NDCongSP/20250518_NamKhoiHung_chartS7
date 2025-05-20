@@ -13,8 +13,6 @@ using System.Runtime.InteropServices;
 using LiveCharts;
 using LiveCharts.WinForms;
 using LiveCharts.Wpf;
-using ClosedXML.Excel;
-using System.Windows.Controls;
 using Separator = LiveCharts.Wpf.Separator;
 using LiveCharts.Definitions.Charts;
 using MigraDoc.DocumentObjectModel;
@@ -22,6 +20,9 @@ using MigraDoc.Rendering;
 using System.Drawing.Imaging;
 using System.Data;
 using MigraDoc.DocumentObjectModel.Shapes;
+using System.Threading;
+using System.Threading.Tasks;
+using Timer = System.Windows.Forms.Timer;
 
 namespace GiamSat.Scada
 {
@@ -34,14 +35,59 @@ namespace GiamSat.Scada
         string _fileName;
         string _filePath;
 
-        double _value = 0, _Max = 0, _Target = 0;
+        double _torque = 0, _max = 0, _target = 0, _trigger = 0;
 
-        List<double> time = new List<double>();
-        List<double> torque = new List<double>();
-        List<double> _target = new List<double>();
-        List<double> _max = new List<double>();
+        //List<double> timeData = new List<double>();
+        List<string> timeData = new List<string>();
+        List<double> torqueData = new List<double>();
+        List<double> _targetData = new List<double>();
+        List<double> _maxData = new List<double>();
 
         private model _config = new model();
+
+        private System.Threading.CancellationTokenSource _cts;
+
+        private Random rnd = new Random();
+
+        int _xLable = 0;
+        bool _isResetChart = true;
+
+        public void Start()
+        {
+            _cts = new CancellationTokenSource();
+            var token = _cts.Token;
+
+            Task.Run(async () =>
+            {
+                while (!token.IsCancellationRequested && _trigger == 1)
+                {
+                    try
+                    {
+                        // 👉 Thực hiện công việc ở đây
+                        Console.WriteLine($"Thời gian: {DateTime.Now:HH:mm:ss}");
+
+                        // Cập nhật dữ liệu vào chart
+                        GlobalVariable.InvokeIfRequired(this, () =>
+                        {
+                            _chart2.Series[0].Values.Add(_torque);
+                            _chart2.Series[1].Values.Add(_target);
+                            _chart2.Series[2].Values.Add(_max);
+                        });
+
+                        await Task.Delay(_config.LogInterval, token); // Chờ 1 giây
+                    }
+                    catch (TaskCanceledException)
+                    {
+                        break;
+                    }
+                }
+            }, token);
+        }
+
+        public void Stop()
+        {
+            _cts?.Cancel();
+        }
 
         public Form1()
         {
@@ -123,15 +169,23 @@ namespace GiamSat.Scada
             string jsonContent = File.ReadAllText(_filePath);
             _config = JsonConvert.DeserializeObject<model>(jsonContent);
 
-            _timer.Interval = 500;
+            _timer.Interval = _config.LogInterval;
             _timer.Tick += _timer_Tick;
             _timer.Enabled = true;
             _btnUpdate.Click += _btnLoad_Click;
             _btnExport.Click += _btnExport_Click;
 
+            #region Chart initialize
             //_chart2.BackColor = System.Drawing.Color.Black;
             _chart2.DataTooltip.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(43, 45, 66));
-            _chart2.LegendLocation = LegendLocation.Right;
+            _chart2.DataTooltip.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(237, 242, 244));
+            //_chart2.DataTooltip.Content = new System.Windows.Controls.TextBlock
+            //{
+            //    Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 202, 58)),
+            //    FontSize = 12,
+            //    FontWeight = System.Windows.FontWeights.Bold
+            //};
+            _chart2.LegendLocation = LegendLocation.Top;
             _chart2.Series = new SeriesCollection();
 
             _chart2.Series.Add(new LineSeries()
@@ -144,6 +198,7 @@ namespace GiamSat.Scada
                 Fill = System.Windows.Media.Brushes.Transparent,
                 LineSmoothness = 1,
                 PointGeometrySize = 10,
+                DataLabels = true,
                 //PointGeometry = null,//hidden point
                 PointForeground =
                     new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(34, 46, 49))
@@ -180,9 +235,11 @@ namespace GiamSat.Scada
             _chart2.AxisX.Add(new Axis()
             {
                 Title = "Time (Sec)",
-                LabelFormatter = value => new System.DateTime((long)(value)).ToString("ss"),
+                LabelFormatter = value => new System.DateTime((long)(value)).ToString(),
                 //LabelFormatter = value => " " + value.ToString("F0") + " ", // đẩy ra bằng khoảng trắng
                 Labels = new string[] { },
+                //MinValue=0,
+                //MaxValue=60,
                 LabelsRotation = 0,
                 Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(43, 45, 66)),
                 IsMerged = false,
@@ -216,7 +273,7 @@ namespace GiamSat.Scada
             {
                 X = 1, // hoặc vị trí bạn muốn (tính theo tọa độ X trên chart)
                 Y = 35000,
-                HorizontalAlignment =System.Windows.HorizontalAlignment.Left,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 UIElement = new System.Windows.Controls.TextBlock
                 {
@@ -238,45 +295,47 @@ namespace GiamSat.Scada
                     FontWeight = System.Windows.FontWeights.Bold
                 }
             });
+            #endregion
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                LoadDataFromFile(openFileDialog1.FileName);
-                CapNhatChartLine();
-            }
+            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            //{
+            //    LoadDataFromFile(openFileDialog1.FileName);
+            //    CapNhatChartLine();
+            //}
         }
 
         #region Events
         private void _btnLoad_Click(object sender, EventArgs e)
         {
-            using (var nf=new Settings())
+            using (var nf = new Settings())
             {
                 nf.ShowDialog();
 
                 // Read the JSON file
                 string jsonContent = File.ReadAllText(_filePath);
                 _config = JsonConvert.DeserializeObject<model>(jsonContent);
+                _timer.Interval = _config.LogInterval;
             }
         }
         private void LoadDataFromFile(string path)
         {
-            time.Clear();
-            torque.Clear();
+            timeData.Clear();
+            torqueData.Clear();
 
             var lines = File.ReadAllLines(path);
             foreach (var line in lines)
             {
                 var parts = line.Split(',');
-                if (parts.Length >= 2 
-                    && double.TryParse(parts[0], out double t) 
-                    && double.TryParse(parts[1], out double tq) 
-                    && double.TryParse(parts[2], out double tg) 
+                if (parts.Length >= 2
+                    && double.TryParse(parts[0], out double t)
+                    && double.TryParse(parts[1], out double tq)
+                    && double.TryParse(parts[2], out double tg)
                     && double.TryParse(parts[3], out double tm))
                 {
-                    time.Add(t);
-                    torque.Add(tq);
-                    _target.Add(tg);
-                    _max.Add(tm);
+                    timeData.Add(t.ToString());
+                    torqueData.Add(tq);
+                    _targetData.Add(tg);
+                    _maxData.Add(tm);
                 }
             }
         }
@@ -292,12 +351,12 @@ namespace GiamSat.Scada
             _chart2.VisualElements.Add(new VisualElement
             {
                 X = 1, // hoặc vị trí bạn muốn (tính theo tọa độ X trên chart)
-                Y = _max.FirstOrDefault(),
+                Y = _max,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 UIElement = new System.Windows.Controls.TextBlock
                 {
-                    Text = $"Max = {_max.FirstOrDefault()}",
+                    Text = $"Max = {_max}",
                     Foreground = System.Windows.Media.Brushes.Black,
                     FontWeight = System.Windows.FontWeights.Bold
                 }
@@ -305,12 +364,12 @@ namespace GiamSat.Scada
             _chart2.VisualElements.Add(new VisualElement
             {
                 X = 1,
-                Y = _target.FirstOrDefault(),
+                Y = _target,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 UIElement = new System.Windows.Controls.TextBlock
                 {
-                    Text = $"Target = {_target.FirstOrDefault()}",
+                    Text = $"Target = {(_target)}",
                     Foreground = System.Windows.Media.Brushes.Black,
                     FontWeight = System.Windows.FontWeights.Bold
                 }
@@ -318,17 +377,95 @@ namespace GiamSat.Scada
 
             List<string> labels = new List<string>();
 
-            for (int i = 0; i < time.Count; i++)
+            for (int i = 0; i < timeData.Count; i++)
             {
-                _chart2.Series[0].Values.Add(torque[i]);
-                _chart2.Series[1].Values.Add(_target[i]);
-                _chart2.Series[2].Values.Add(_max[i]);
-                labels.Add(time[i].ToString());
+                _chart2.Series[0].Values.Add(torqueData[i]);
+                _chart2.Series[1].Values.Add(_targetData[i]);
+                _chart2.Series[2].Values.Add(_maxData[i]);
+                labels.Add(timeData[i].ToString());
             }
 
             _chart2.AxisX[0].Labels = labels;
 
             _chart2.Update(true, true);
+        }
+
+        private void UpdateChart()
+        {
+            GlobalVariable.InvokeIfRequired(this, () =>
+            {
+                // Tạo giá trị mới
+                //double newTorque = rnd.Next(10000, 45000); // Tùy chỉnh min/max phù hợp
+                double newTorque = _torque; // Tùy chỉnh min/max phù hợp
+                double newTarget = _target;
+                double newMax = _max;
+
+                // Thêm dữ liệu mới và kiểm tra số lượng
+                var torqueSeries = _chart2.Series[0].Values;
+                var maxSeries = _chart2.Series[1].Values;
+                var targetSeries = _chart2.Series[2].Values;
+                //var labels = _chart2.AxisX[0].Labels.ToList();
+
+
+                if (torqueSeries.Count >= _config.maxPoints)
+                {
+                    var pointRemove = torqueSeries.Count - _config.maxPoints;
+
+                    for (int i = 0; i < pointRemove; i++)
+                    {
+                        torqueSeries.RemoveAt(i);
+                        maxSeries.RemoveAt(i);
+                        targetSeries.RemoveAt(i);
+                        timeData.RemoveAt(i);
+                    }
+                    //torqueSeries.RemoveAt(0);
+                    //maxSeries.RemoveAt(0);
+                    //targetSeries.RemoveAt(0);
+                    //timeData.RemoveAt(0);
+                }
+
+                torqueSeries.Add(newTorque);
+                maxSeries.Add(newMax);
+                targetSeries.Add(newTarget);
+                //timeData.Add(DateTime.Now.Second.ToString());
+                timeData.Add(_xLable.ToString());
+                _chart2.AxisX[0].Labels = timeData;
+
+                #region  Cập nhật lại VisualElements để giữ label cho Max và Target
+                _chart2.VisualElements.Clear();
+                _chart2.VisualElements.Add(new VisualElement
+                {
+                    X = 2,
+                    Y = _max,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    UIElement = new System.Windows.Controls.TextBlock
+                    {
+                        Text = $"Max = {_max}",
+                        Foreground = System.Windows.Media.Brushes.Black,
+                        FontWeight = System.Windows.FontWeights.Bold
+                    }
+                });
+                _chart2.VisualElements.Add(new VisualElement
+                {
+                    X = 2,
+                    Y = _target,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    UIElement = new System.Windows.Controls.TextBlock
+                    {
+                        Text = $"Target = {_target}",
+                        Foreground = System.Windows.Media.Brushes.Black,
+                        FontWeight = System.Windows.FontWeights.Bold
+                    }
+                });
+                #endregion
+
+                // Cập nhật lại label cho trục X
+                _xLable += 1;
+
+                _chart2.Update(false, true);
+            });
         }
 
         private void _btnExport_Click(object sender, EventArgs e)
@@ -348,6 +485,11 @@ namespace GiamSat.Scada
             try
             {
                 t.Enabled = false;
+                if (_trigger >= 1)
+                {
+                    UpdateChart();
+                }
+
                 GlobalVariable.InvokeIfRequired(this, () => { _labTime.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"); });
             }
             catch (Exception ex) { Log.Error(ex, "From _timer_Tick"); }
@@ -355,6 +497,29 @@ namespace GiamSat.Scada
             {
                 t.Enabled = true;
             }
+        }
+
+        private void ResetChart()
+        {
+            GlobalVariable.InvokeIfRequired(this, () =>
+            {
+                _chart2.Series[0].Values.Clear();
+                _chart2.Series[1].Values.Clear();
+                _chart2.Series[2].Values.Clear();
+
+                _chart2.VisualElements.Clear();
+
+                if (_chart2.AxisX[0]?.Labels is IList<string> labels && !labels.IsReadOnly)
+                {
+                    labels.Clear();
+                }
+                else
+                {
+                    _chart2.AxisX[0].Labels = new List<string>();
+                }
+
+                _chart2.Update(true, true);
+            });
         }
 
         private void _easyDriverConnector_Started(object sender, EventArgs e)
@@ -366,6 +531,7 @@ namespace GiamSat.Scada
                 _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value").ValueChanged += Value_ValueChanged;
                 _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max").ValueChanged += Max_ValueChanged;
                 _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target").ValueChanged += Target_ValueChanged;
+                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Trigger").ValueChanged += Trigger_ValueChanged;
 
                 Value_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value")
                     , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value")
@@ -376,6 +542,9 @@ namespace GiamSat.Scada
                 Target_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target")
                    , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target")
                    , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target").Value));
+                Trigger_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Trigger")
+                   , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Trigger")
+                   , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Trigger").Value));
             }
         }
 
@@ -387,7 +556,7 @@ namespace GiamSat.Scada
             {
                 var path = e?.Tag.Parent.Path;
 
-                var newValue = double.TryParse(e.NewValue, out double value) ? value : 0;
+                _torque = double.TryParse(e.NewValue, out double value) ? value : 0;
             }
             catch (Exception ex) { Log.Error(ex, $"From TagValueChanged {e.Tag.Path}"); }
         }
@@ -398,7 +567,7 @@ namespace GiamSat.Scada
             {
                 var path = e?.Tag.Parent.Path;
 
-                var newValue = double.TryParse(e.NewValue, out double value) ? value : 0;
+                _max = double.TryParse(e.NewValue, out double value) ? value : 0;
             }
             catch (Exception ex) { Log.Error(ex, $"From TagValueChanged {e.Tag.Path}"); }
         }
@@ -409,7 +578,27 @@ namespace GiamSat.Scada
             {
                 var path = e?.Tag.Parent.Path;
 
-                var newValue = double.TryParse(e.NewValue, out double value) ? value : 0;
+                _target = double.TryParse(e.NewValue, out double value) ? value : 0;
+            }
+            catch (Exception ex) { Log.Error(ex, $"From TagValueChanged {e.Tag.Path}"); }
+        }
+
+        private void Trigger_ValueChanged(object sender, TagValueChangedEventArgs e)
+        {
+            try
+            {
+                var path = e?.Tag.Parent.Path;
+
+                _trigger = double.TryParse(e.NewValue, out double value) ? value : 0;
+
+                if (_trigger != 0 && _isResetChart == true) { _isResetChart = false; }
+
+                if (!_isResetChart)
+                {
+                    ResetChart();
+                    _xLable = 0;
+                    _isResetChart = true;
+                }
             }
             catch (Exception ex) { Log.Error(ex, $"From TagValueChanged {e.Tag.Path}"); }
         }
@@ -440,17 +629,17 @@ namespace GiamSat.Scada
             watermark.Format.Alignment = ParagraphAlignment.Center;
             watermark.Format.SpaceBefore = "8cm";
 
-            // Logo bottom right
-            var logoPath = "LogoPT.ico";
-            if (File.Exists(logoPath))
-            {
-                var image = section.Footers.Primary.AddImage(logoPath);
-                image.Width = "3cm";
-                image.LockAspectRatio = true;
-                image.Left = ShapePosition.Right;
-                image.Top = ShapePosition.Bottom;
-                image.WrapFormat.Style = WrapStyle.Through;
-            }
+            //// Logo bottom right
+            //var logoPath = "LogoPT.ico";
+            //if (File.Exists(logoPath))
+            //{
+            //    var image = section.Footers.Primary.AddImage(logoPath);
+            //    image.Width = "3cm";
+            //    image.LockAspectRatio = true;
+            //    image.Left = ShapePosition.Right;
+            //    image.Top = ShapePosition.Bottom;
+            //    image.WrapFormat.Style = WrapStyle.Through;
+            //}
 
             // Title
             var title = section.AddParagraph("CONNECTION TORQUE LOG");
@@ -463,6 +652,7 @@ namespace GiamSat.Scada
             var infoTable = section.AddTable();
             infoTable.Borders.Visible = false;
             infoTable.AddColumn("7.5cm");
+            infoTable.AddColumn("3cm");
             infoTable.AddColumn("7.5cm");
 
             var row = infoTable.AddRow();
@@ -474,7 +664,7 @@ namespace GiamSat.Scada
                 "SERIES:\n" +
                 "TOOL S/N: OSC115748A"
             );
-            row.Cells[1].AddParagraph(
+            row.Cells[2].AddParagraph(
                 "LOG MASTER™ II S/N: LM2-586\n" +
                 "TORQUEMASTER™ S/N: 8025 - 5020\n" +
                 "CONSOLE S/N: 8018 - 5032"
@@ -487,9 +677,10 @@ namespace GiamSat.Scada
             // Data Table
             var dataTable = section.AddTable();
             dataTable.Borders.Width = 0.75;
-            dataTable.AddColumn("4cm");
-            dataTable.AddColumn("4cm");
-            dataTable.AddColumn("4cm");
+            dataTable.AddColumn("6cm");
+            dataTable.AddColumn("6cm");
+            dataTable.AddColumn("6cm");
+            dataTable.Format.Alignment = ParagraphAlignment.Justify;
 
             var header = dataTable.AddRow();
             header.Shading.Color = Colors.LightGray;
@@ -499,8 +690,8 @@ namespace GiamSat.Scada
 
             var dataRow = dataTable.AddRow();
             dataRow.Cells[0].AddParagraph("LFJ-KM");
-            dataRow.Cells[1].AddParagraph("40,600");
-            dataRow.Cells[2].AddParagraph("40,960");
+            dataRow.Cells[1].AddParagraph("40,600").Format.Alignment = ParagraphAlignment.Right;
+            dataRow.Cells[2].AddParagraph("40,960").Format.Alignment = ParagraphAlignment.Right;
 
             // Chart Image Placeholder
             section.AddParagraph("\n");
@@ -508,7 +699,7 @@ namespace GiamSat.Scada
             if (File.Exists(chartImagePath))
             {
                 var chartImage = section.AddImage(chartImagePath);
-                chartImage.Width = "15cm";
+                chartImage.Width = "16cm";
                 chartImage.LockAspectRatio = true;
                 chartImage.Top = ShapePosition.Top;
                 chartImage.Left = ShapePosition.Center;

@@ -50,6 +50,10 @@
             this._txtConnectionName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this._btnSave = new System.Windows.Forms.Button();
+            this._txtLogInterval = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this._txtPointNum = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
@@ -240,14 +244,54 @@
             this._btnSave.Name = "_btnSave";
             this._btnSave.Size = new System.Drawing.Size(139, 41);
             this._btnSave.TabIndex = 35;
-            this._btnSave.Text = "button1";
+            this._btnSave.Text = "Save";
             this._btnSave.UseVisualStyleBackColor = false;
+            // 
+            // _txtLogInterval
+            // 
+            this._txtLogInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._txtLogInterval.Location = new System.Drawing.Point(448, 98);
+            this._txtLogInterval.Name = "_txtLogInterval";
+            this._txtLogInterval.Size = new System.Drawing.Size(113, 23);
+            this._txtLogInterval.TabIndex = 37;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label11.Location = new System.Drawing.Point(448, 78);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(118, 17);
+            this.label11.TabIndex = 36;
+            this.label11.Text = "Log Interval (sec)";
+            // 
+            // _txtPointNum
+            // 
+            this._txtPointNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._txtPointNum.Location = new System.Drawing.Point(448, 151);
+            this._txtPointNum.Name = "_txtPointNum";
+            this._txtPointNum.Size = new System.Drawing.Size(113, 23);
+            this._txtPointNum.TabIndex = 39;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label12.Location = new System.Drawing.Point(448, 131);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(94, 17);
+            this.label12.TabIndex = 38;
+            this.label12.Text = "Point Number";
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 359);
+            this.Controls.Add(this._txtPointNum);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this._txtLogInterval);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this._btnSave);
             this.Controls.Add(this._txtConnectionName);
             this.Controls.Add(this.label10);
@@ -301,5 +345,9 @@
         private System.Windows.Forms.TextBox _txtConnectionName;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button _btnSave;
+        private System.Windows.Forms.TextBox _txtLogInterval;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox _txtPointNum;
+        private System.Windows.Forms.Label label12;
     }
 }

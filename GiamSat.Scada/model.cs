@@ -23,5 +23,16 @@ namespace GiamSat.Scada
         public double Max { get; set; } = 0;
         public double Target { get; set; } = 0;
         public double LoggedTorque { get; set; } = 0;
+
+        /// <summary>
+        /// Thời gian chờ giữa các lần đọc dữ liệu.
+        /// đơn vị seconds.
+        /// </summary>
+        public int LogInterval { get; set; } = 1000;
+
+        /// <summary>
+        /// point num.
+        /// </summary>
+        public int maxPoints { get; set; } = 25;
     }
 }

@@ -1,0 +1,133 @@
+{
+  "ItemType": 0,
+  "ServerAddress": "127.0.0.1",
+  "Port": 8800,
+  "CommunicationMode": 0,
+  "RefreshRate": 100,
+  "CreatedDate": "2025-05-19T20:41:40.004668+07:00",
+  "Username": null,
+  "Password": null,
+  "Childs": [
+    {
+      "ItemType": 1,
+      "Name": "Local Station",
+      "Path": "Local Station",
+      "Description": null,
+      "DisplayInfo": null,
+      "Error": null,
+      "ConnectionStatus": 1,
+      "Childs": [
+        {
+          "ItemType": 3,
+          "Name": "Channel1",
+          "Path": "Local Station/Channel1",
+          "Description": null,
+          "DisplayInfo": "S7Ethernet",
+          "Error": null,
+          "ConnectionStatus": 0,
+          "Childs": [
+            {
+              "ItemType": 4,
+              "Name": "Device1",
+              "Path": "Local Station/Channel1/Device1",
+              "Description": null,
+              "DisplayInfo": null,
+              "Error": null,
+              "ConnectionStatus": 0,
+              "Childs": [
+                {
+                  "ItemType": 6,
+                  "Name": "Value",
+                  "Path": "Local Station/Channel1/Device1/Value",
+                  "Description": null,
+                  "DisplayInfo": null,
+                  "Error": null,
+                  "ConnectionStatus": 0,
+                  "Childs": [],
+                  "Properties": {
+                    "LastAddress": "DB1.DBW0",
+                    "AddressType": "Datablock",
+                    "ByteOffset": "0",
+                    "BitOffset": "0",
+                    "IsValid": "True",
+                    "IsBitAddress": "False",
+                    "DBNumber": "1",
+                    "DataType": "Word",
+                    "Address": "DB1.DBW0"
+                  }
+                },
+                {
+                  "ItemType": 6,
+                  "Name": "Max",
+                  "Path": "Local Station/Channel1/Device1/Max",
+                  "Description": null,
+                  "DisplayInfo": null,
+                  "Error": null,
+                  "ConnectionStatus": 0,
+                  "Childs": [],
+                  "Properties": {
+                    "LastAddress": "Retain",
+                    "IsValid": "False",
+                    "DataType": "String",
+                    "Address": "Retain"
+                  }
+                },
+                {
+                  "ItemType": 6,
+                  "Name": "Target",
+                  "Path": "Local Station/Channel1/Device1/Target",
+                  "Description": null,
+                  "DisplayInfo": null,
+                  "Error": null,
+                  "ConnectionStatus": 0,
+                  "Childs": [],
+                  "Properties": {
+                    "LastAddress": "Retain",
+                    "IsValid": "False",
+                    "DataType": "String",
+                    "Address": "Retain"
+                  }
+                },
+                {
+                  "ItemType": 6,
+                  "Name": "Trigger",
+                  "Path": "Local Station/Channel1/Device1/Trigger",
+                  "Description": null,
+                  "DisplayInfo": null,
+                  "Error": null,
+                  "ConnectionStatus": 0,
+                  "Childs": [],
+                  "Properties": {
+                    "LastAddress": "DB1.DBW10",
+                    "AddressType": "Datablock",
+                    "ByteOffset": "10",
+                    "BitOffset": "0",
+                    "IsValid": "True",
+                    "IsBitAddress": "False",
+                    "DBNumber": "1",
+                    "bitOffset": "0",
+                    "DataType": "Word",
+                    "Address": "DB1.DBW10"
+                  }
+                }
+              ],
+              "Properties": {
+                "IpAddress": "192.168.1.100",
+                "Timeout": "1000",
+                "TryReadWriteTimes": "3",
+                "DelayBetweenPool": "10",
+                "Port": "102",
+                "ScanRate": "1000",
+                "Rack": "0",
+                "Slot": "1"
+              }
+            }
+          ],
+          "Properties": {}
+        }
+      ],
+      "Properties": {}
+    }
+  ],
+  "Properties": {}
+}

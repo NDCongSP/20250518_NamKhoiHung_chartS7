@@ -59,6 +59,30 @@ namespace GiamSat.Scada
             _txtSeries.TextChanged += (s, o) => _config.Series = _txtSeries.Text;
             _txtToolSN.TextChanged += (s, o) => _config.ToolSN = _txtToolSN.Text;
             _txtConnectionName.TextChanged += (s, o) => _config.ConnectionName = _txtConnectionName.Text;
+            _txtLogInterval.TextChanged+=(s,o) =>
+            {
+                if (int.TryParse(_txtLogInterval.Text, out int interval))
+                {
+                    _config.LogInterval = interval;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid input. Please enter a valid number.");
+                    _txtLogInterval.Text = _config.LogInterval.ToString();
+                }
+            };
+            _txtPointNum.TextChanged += (s, o) =>
+            {
+                if (int.TryParse(_txtPointNum.Text, out int pointNum))
+                {
+                    _config.maxPoints = pointNum;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid input. Please enter a valid number.");
+                    _txtPointNum.Text = _config.maxPoints.ToString();
+                }
+            };
             #endregion
         }
 
@@ -83,6 +107,8 @@ namespace GiamSat.Scada
                 _txtSeries.Text = _config.Series;
                 _txtToolSN.Text = _config.ToolSN;
                 _txtConnectionName.Text = _config.ConnectionName;
+                _txtLogInterval.Text = _config.LogInterval.ToString();
+                _txtPointNum.Text = _config.maxPoints.ToString();
             });
         }
     }

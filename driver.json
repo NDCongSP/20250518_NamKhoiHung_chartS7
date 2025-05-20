@@ -11,7 +11,7 @@
   "IsReadOnly": true,
   "Enabled": true,
   "CreatedDate": "2024-12-14T04:26:30.7071104+07:00",
-  "ModifiedDate": "2025-05-18T20:21:53.9919224+07:00",
+  "ModifiedDate": "2025-05-19T20:41:23.2115935+07:00",
   "ParameterContainer": {
   "DisplayName": null,
   "DisplayParameters": null,
@@ -31,7 +31,7 @@
   "IsReadOnly": false,
   "Enabled": true,
   "CreatedDate": "2024-12-14T04:26:38.3605266+07:00",
-  "ModifiedDate": "2025-05-18T20:21:53.9919224+07:00",
+  "ModifiedDate": "2025-05-19T20:41:23.2115935+07:00",
   "ParameterContainer": {
   "DisplayName": null,
   "DisplayParameters": null,
@@ -46,7 +46,7 @@
   "IsReadOnly": false,
   "Enabled": true,
   "CreatedDate": "2024-12-14T04:26:45.9797621+07:00",
-  "ModifiedDate": "2025-05-18T20:24:11.5516307+07:00",
+  "ModifiedDate": "2025-05-19T20:41:23.2115935+07:00",
   "ParameterContainer": {
   "DisplayName": "S7Ethernet Device Parameter",
   "DisplayParameters": "S7Ethernet Device Parameter",
@@ -162,6 +162,44 @@
   "IsInternalTag": true,
   "GUID": "ea7cc26f-3847-4d2e-b95e-832caa7d2bc0",
   "Retain": true,
+  "Childs": [],
+  "HaveTags": true,
+  "Tags": []
+},
+    {
+  "Name": "Trigger",
+  "Description": null,
+  "ItemType": "Tag",
+  "IsReadOnly": false,
+  "Enabled": true,
+  "CreatedDate": "2025-05-19T20:34:00.2360122+07:00",
+  "ModifiedDate": "2025-05-19T20:34:00.2360122+07:00",
+  "ParameterContainer": {
+  "DisplayName": "Tag Parameters",
+  "DisplayParameters": "Tag Parameters",
+  "Parameters": {
+    "LastAddress": "DB1.DBW10",
+    "AddressType": "Datablock",
+    "ByteOffset": "10",
+    "BitOffset": "0",
+    "IsValid": "True",
+    "IsBitAddress": "False",
+    "DBNumber": "1",
+    "bitOffset": "0",
+    "DataType": "Word",
+    "Address": "DB1.DBW10"
+  }
+},
+  "Address": "DB1.DBW10",
+  "DataTypeName": "Word",
+  "RefreshRate": 100,
+  "ByteOrder": 0,
+  "AccessPermission": "ReadAndWrite",
+  "Offset": 0.0,
+  "Gain": 1.0,
+  "IsInternalTag": false,
+  "GUID": null,
+  "Retain": false,
   "Childs": [],
   "HaveTags": true,
   "Tags": []
