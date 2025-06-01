@@ -35,13 +35,18 @@ namespace GiamSat.Scada
         string _fileName;
         string _filePath;
 
-        double _torque = 0, _max = 0, _target = 0, _trigger = 0;
+        double _torque1 = 0, _max1 = 0, _target1 = 0, _trigger = 0;
+        double _torque2 = 0, _max2 = 0, _target2 = 0;
 
         //List<double> timeData = new List<double>();
         List<string> timeData = new List<string>();
-        List<double> torqueData = new List<double>();
-        List<double> _targetData = new List<double>();
-        List<double> _maxData = new List<double>();
+        List<double> torqueData1 = new List<double>();
+        List<double> _targetData1 = new List<double>();
+        List<double> _maxData1 = new List<double>();
+
+        List<double> torqueData2 = new List<double>();
+        List<double> _targetData2 = new List<double>();
+        List<double> _maxData2 = new List<double>();
 
         private model _config = new model();
 
@@ -69,9 +74,9 @@ namespace GiamSat.Scada
                         // Cập nhật dữ liệu vào chart
                         GlobalVariable.InvokeIfRequired(this, () =>
                         {
-                            _chart2.Series[0].Values.Add(_torque);
-                            _chart2.Series[1].Values.Add(_target);
-                            _chart2.Series[2].Values.Add(_max);
+                            _chart2.Series[0].Values.Add(_torque1);
+                            _chart2.Series[1].Values.Add(_target1);
+                            _chart2.Series[2].Values.Add(_max1);
                         });
 
                         await Task.Delay(_config.LogInterval, token); // Chờ 1 giây
@@ -174,6 +179,7 @@ namespace GiamSat.Scada
             _timer.Enabled = true;
             _btnUpdate.Click += _btnLoad_Click;
             _btnExport.Click += _btnExport_Click;
+            _btnStartStop.Click += _btnStartStop_Click;
 
             #region Chart initialize
             //_chart2.BackColor = System.Drawing.Color.Black;
@@ -304,6 +310,11 @@ namespace GiamSat.Scada
             //}
         }
 
+        private void _btnStartStop_Click(object sender, EventArgs e)
+        {
+            _trigger = _trigger == 0 ? 1 : 0; // Toggle trigger state
+        }
+
         #region Events
         private void _btnLoad_Click(object sender, EventArgs e)
         {
@@ -320,7 +331,7 @@ namespace GiamSat.Scada
         private void LoadDataFromFile(string path)
         {
             timeData.Clear();
-            torqueData.Clear();
+            torqueData1.Clear();
 
             var lines = File.ReadAllLines(path);
             foreach (var line in lines)
@@ -333,9 +344,9 @@ namespace GiamSat.Scada
                     && double.TryParse(parts[3], out double tm))
                 {
                     timeData.Add(t.ToString());
-                    torqueData.Add(tq);
-                    _targetData.Add(tg);
-                    _maxData.Add(tm);
+                    torqueData1.Add(tq);
+                    _targetData1.Add(tg);
+                    _maxData1.Add(tm);
                 }
             }
         }
@@ -351,12 +362,12 @@ namespace GiamSat.Scada
             _chart2.VisualElements.Add(new VisualElement
             {
                 X = 1, // hoặc vị trí bạn muốn (tính theo tọa độ X trên chart)
-                Y = _max,
+                Y = _max1,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 UIElement = new System.Windows.Controls.TextBlock
                 {
-                    Text = $"Max = {_max}",
+                    Text = $"Max = {_max1}",
                     Foreground = System.Windows.Media.Brushes.Black,
                     FontWeight = System.Windows.FontWeights.Bold
                 }
@@ -364,12 +375,12 @@ namespace GiamSat.Scada
             _chart2.VisualElements.Add(new VisualElement
             {
                 X = 1,
-                Y = _target,
+                Y = _target1,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 UIElement = new System.Windows.Controls.TextBlock
                 {
-                    Text = $"Target = {(_target)}",
+                    Text = $"Target = {(_target1)}",
                     Foreground = System.Windows.Media.Brushes.Black,
                     FontWeight = System.Windows.FontWeights.Bold
                 }
@@ -379,9 +390,9 @@ namespace GiamSat.Scada
 
             for (int i = 0; i < timeData.Count; i++)
             {
-                _chart2.Series[0].Values.Add(torqueData[i]);
-                _chart2.Series[1].Values.Add(_targetData[i]);
-                _chart2.Series[2].Values.Add(_maxData[i]);
+                _chart2.Series[0].Values.Add(torqueData1[i]);
+                _chart2.Series[1].Values.Add(_targetData1[i]);
+                _chart2.Series[2].Values.Add(_maxData1[i]);
                 labels.Add(timeData[i].ToString());
             }
 
@@ -396,9 +407,9 @@ namespace GiamSat.Scada
             {
                 // Tạo giá trị mới
                 //double newTorque = rnd.Next(10000, 45000); // Tùy chỉnh min/max phù hợp
-                double newTorque = _torque; // Tùy chỉnh min/max phù hợp
-                double newTarget = _target;
-                double newMax = _max;
+                double newTorque = _torque1; // Tùy chỉnh min/max phù hợp
+                double newTarget = _target1;
+                double newMax = _max1;
 
                 // Thêm dữ liệu mới và kiểm tra số lượng
                 var torqueSeries = _chart2.Series[0].Values;
@@ -436,12 +447,12 @@ namespace GiamSat.Scada
                 _chart2.VisualElements.Add(new VisualElement
                 {
                     X = 2,
-                    Y = _max,
+                    Y = _max1,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     VerticalAlignment = System.Windows.VerticalAlignment.Center,
                     UIElement = new System.Windows.Controls.TextBlock
                     {
-                        Text = $"Max = {_max}",
+                        Text = $"Max = {_max1}",
                         Foreground = System.Windows.Media.Brushes.Black,
                         FontWeight = System.Windows.FontWeights.Bold
                     }
@@ -449,12 +460,12 @@ namespace GiamSat.Scada
                 _chart2.VisualElements.Add(new VisualElement
                 {
                     X = 2,
-                    Y = _target,
+                    Y = _target1,
                     HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     VerticalAlignment = System.Windows.VerticalAlignment.Center,
                     UIElement = new System.Windows.Controls.TextBlock
                     {
-                        Text = $"Target = {_target}",
+                        Text = $"Target = {_target1}",
                         Foreground = System.Windows.Media.Brushes.Black,
                         FontWeight = System.Windows.FontWeights.Bold
                     }
@@ -528,77 +539,99 @@ namespace GiamSat.Scada
             //foreach (var item in _ovensInfo)
             {
                 //easyDriverConnector1.GetTag($"{item.Path}/Temperature").QualityChanged += Temperature_QualityChanged;
-                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value").ValueChanged += Value_ValueChanged;
-                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max").ValueChanged += Max_ValueChanged;
-                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target").ValueChanged += Target_ValueChanged;
-                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Trigger").ValueChanged += Trigger_ValueChanged;
+                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value1").ValueChanged += Value1_ValueChanged;
+                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max1").ValueChanged += Max1_ValueChanged;
+                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target1").ValueChanged += Target1_ValueChanged;
 
-                Value_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value")
-                    , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value")
-                    , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value").Value));
-                Max_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max")
-                   , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max")
-                   , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max").Value));
-                Target_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target")
-                   , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target")
-                   , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target").Value));
-                Trigger_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Trigger")
-                   , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Trigger")
-                   , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Trigger").Value));
+                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value2").ValueChanged += Value2_ValueChanged;
+                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max2").ValueChanged += Max2_ValueChanged;
+                _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target2").ValueChanged += Target2_ValueChanged;
+
+                Value1_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value1")
+                    , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value1")
+                    , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value1").Value));
+                Max1_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max1")
+                   , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max1")
+                   , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max1").Value));
+                Target1_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target1")
+                   , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target1")
+                   , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target1").Value));
+
+                Value2_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value2")
+                   , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value2")
+                   , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Value2").Value));
+                Max2_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max2")
+                   , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max2")
+                   , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Max2").Value));
+                Target2_ValueChanged(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target2")
+                   , new TagValueChangedEventArgs(_easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target2")
+                   , "", _easyDriverConnector.GetTag($"Local Station/Channel1/Device1/Target2").Value));
             }
         }
 
         #region Event tag value change
-
-        private void Value_ValueChanged(object sender, TagValueChangedEventArgs e)
+        private void Value1_ValueChanged(object sender, TagValueChangedEventArgs e)
         {
             try
             {
                 var path = e?.Tag.Parent.Path;
 
-                _torque = double.TryParse(e.NewValue, out double value) ? value : 0;
+                _torque1 = double.TryParse(e.NewValue, out double value) ? value : 0;
             }
             catch (Exception ex) { Log.Error(ex, $"From TagValueChanged {e.Tag.Path}"); }
         }
 
-        private void Max_ValueChanged(object sender, TagValueChangedEventArgs e)
+        private void Max1_ValueChanged(object sender, TagValueChangedEventArgs e)
         {
             try
             {
                 var path = e?.Tag.Parent.Path;
 
-                _max = double.TryParse(e.NewValue, out double value) ? value : 0;
+                _max1 = double.TryParse(e.NewValue, out double value) ? value : 0;
             }
             catch (Exception ex) { Log.Error(ex, $"From TagValueChanged {e.Tag.Path}"); }
         }
 
-        private void Target_ValueChanged(object sender, TagValueChangedEventArgs e)
+        private void Target1_ValueChanged(object sender, TagValueChangedEventArgs e)
         {
             try
             {
                 var path = e?.Tag.Parent.Path;
 
-                _target = double.TryParse(e.NewValue, out double value) ? value : 0;
+                _target1 = double.TryParse(e.NewValue, out double value) ? value : 0;
             }
             catch (Exception ex) { Log.Error(ex, $"From TagValueChanged {e.Tag.Path}"); }
         }
 
-        private void Trigger_ValueChanged(object sender, TagValueChangedEventArgs e)
+        private void Value2_ValueChanged(object sender, TagValueChangedEventArgs e)
         {
             try
             {
                 var path = e?.Tag.Parent.Path;
 
-                _trigger = double.TryParse(e.NewValue, out double value) ? value : 0;
+                _torque2 = double.TryParse(e.NewValue, out double value) ? value : 0;
+            }
+            catch (Exception ex) { Log.Error(ex, $"From TagValueChanged {e.Tag.Path}"); }
+        }
 
-                if (_trigger != 0 && _isResetChart == true) { _isResetChart = false; }
+        private void Max2_ValueChanged(object sender, TagValueChangedEventArgs e)
+        {
+            try
+            {
+                var path = e?.Tag.Parent.Path;
 
-                if (!_isResetChart)
-                {
-                    ResetChart();
-                    _xLable = 0;
-                    _isResetChart = true;
-                }
+                _max2 = double.TryParse(e.NewValue, out double value) ? value : 0;
+            }
+            catch (Exception ex) { Log.Error(ex, $"From TagValueChanged {e.Tag.Path}"); }
+        }
+
+        private void Target2_ValueChanged(object sender, TagValueChangedEventArgs e)
+        {
+            try
+            {
+                var path = e?.Tag.Parent.Path;
+
+                _target2 = double.TryParse(e.NewValue, out double value) ? value : 0;
             }
             catch (Exception ex) { Log.Error(ex, $"From TagValueChanged {e.Tag.Path}"); }
         }
@@ -657,17 +690,17 @@ namespace GiamSat.Scada
 
             var row = infoTable.AddRow();
             row.Cells[0].AddParagraph(
-                "OPERATOR: ZAHADI\n" +
-                "DATE: 09 APR 25 (10:29:50)\n" +
-                "TOOL: Series Jar\n" +
-                "JOB NO.: ASSEMBLE HQ650 JAR\n" +
-                "SERIES:\n" +
-                "TOOL S/N: OSC115748A"
+                $"OPERATOR: {_config.Operator}\n" +
+                $"DATE: {DateTime.Now.ToString("dd MMM yy")} ({DateTime.Now.ToString("HH:mm:ss")})\n" +
+                $"TOOL: {_config.Tool}\n" +
+                $"JOB NO.: {_config.JobNo}\n" +
+                $"SERIES:{_config   .Series}\n" +
+                $"TOOL S/N: {_config.ToolSN}"
             );
             row.Cells[2].AddParagraph(
-                "LOG MASTER™ II S/N: LM2-586\n" +
-                "TORQUEMASTER™ S/N: 8025 - 5020\n" +
-                "CONSOLE S/N: 8018 - 5032"
+                $"LOG MASTER™ II S/N: {_config.LogMasterSN}\n" +
+                $"TORQUEMASTER™ S/N: {_config.TorqueMasterSN}\n" +
+                $"CONSOLE S/N: {_config.ConsoleSN}"
             );
 
             section.AddParagraph().Format.SpaceAfter = "0.3cm";
@@ -689,9 +722,9 @@ namespace GiamSat.Scada
             header.Cells[2].AddParagraph("Logged Torque\n(lb-ft)").Format.Font.Bold = true;
 
             var dataRow = dataTable.AddRow();
-            dataRow.Cells[0].AddParagraph("LFJ-KM");
-            dataRow.Cells[1].AddParagraph("40,600").Format.Alignment = ParagraphAlignment.Right;
-            dataRow.Cells[2].AddParagraph("40,960").Format.Alignment = ParagraphAlignment.Right;
+            dataRow.Cells[0].AddParagraph(_config.ConnectionName);
+            dataRow.Cells[1].AddParagraph(_target1.ToString()).Format.Alignment = ParagraphAlignment.Right;
+            dataRow.Cells[2].AddParagraph(_torque1.ToString()).Format.Alignment = ParagraphAlignment.Right;
 
             // Chart Image Placeholder
             section.AddParagraph("\n");

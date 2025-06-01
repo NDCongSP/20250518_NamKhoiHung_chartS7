@@ -88,9 +88,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label1.Location = new System.Drawing.Point(238, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 17);
+            this.label1.Size = new System.Drawing.Size(79, 17);
             this.label1.TabIndex = 17;
-            this.label1.Text = "Log Master TM II S/N";
+            this.label1.Text = "Log Master";
             // 
             // _txtTorqueMaster
             // 
