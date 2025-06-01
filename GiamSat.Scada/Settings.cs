@@ -53,7 +53,6 @@ namespace GiamSat.Scada
             _txtLogMaster.TextChanged += (s, o) => _config.LogMasterSN = _txtLogMaster.Text;
             _txtTorqueMaster.TextChanged += (s, o) => _config.TorqueMasterSN = _txtTorqueMaster.Text;
             _txtConsole.TextChanged += (s, o) => _config.ConsoleSN = _txtConsole.Text;
-            _txtDate.TextChanged += (s, o) => _config.Date = _txtDate.Text;
             _txtTool.TextChanged += (s, o) => _config.Tool = _txtTool.Text;
             _txtJobNo.TextChanged += (s, o) => _config.JobNo = _txtJobNo.Text;
             _txtSeries.TextChanged += (s, o) => _config.Series = _txtSeries.Text;
@@ -101,7 +100,6 @@ namespace GiamSat.Scada
                 _txtLogMaster.Text = _config.LogMasterSN;
                 _txtTorqueMaster.Text = _config.TorqueMasterSN;
                 _txtConsole.Text = _config.ConsoleSN;
-                _txtDate.Text = _config.Date;
                 _txtTool.Text = _config.Tool;
                 _txtJobNo.Text = _config.JobNo;
                 _txtSeries.Text = _config.Series;

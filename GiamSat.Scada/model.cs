@@ -11,7 +11,6 @@ namespace GiamSat.Scada
         public string Operator { get; set; } = "ZAHADI";
         public string LogMasterSN { get; set; } = "LM2-586";
         public string TorqueMasterSN { get; set; } = "8025-5020";
-        public string Date { get; set; } = "09 APR 25 (10:29:50)";
         public string ConsoleSN { get; set; } = "8018-5032";
         public string Tool { get; set; } = "Series Jar";
         public string JobNo { get; set; } = "ESSEMBLE HQ650 JAR";

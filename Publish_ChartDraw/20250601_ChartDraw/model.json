@@ -1,0 +1,16 @@
+{
+  "Operator": "ZAHADI12",
+  "LogMasterSN": "LM2-58612",
+  "TorqueMasterSN": "8025-502012",
+  "ConsoleSN": "8018-503212",
+  "Tool": "Series Jar12",
+  "JobNo": "ESSEMBLE HQ650 JAR12",
+  "Series": "1111123",
+  "ToolSN": "OSC115748A12",
+  "ConnectionName": "LFJ-KMrrrr12",
+  "Max": 0.0,
+  "Target": 0.0,
+  "LoggedTorque": 0.0,
+  "LogInterval": 1000,
+  "maxPoints": 25
+}
