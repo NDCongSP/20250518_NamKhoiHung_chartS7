@@ -51,7 +51,7 @@ namespace GiamSat.Scada
             this.easyTextBox4 = new EasyScada.Winforms.Controls.EasyTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this._btnStartStop = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this._tab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this._chart2 = new LiveCharts.WinForms.CartesianChart();
@@ -62,7 +62,7 @@ namespace GiamSat.Scada
             ((System.ComponentModel.ISupportInitialize)(this.easyLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.easyTextBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.easyTextBox4)).BeginInit();
-            this.tabControl1.SuspendLayout();
+            this._tab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
@@ -311,15 +311,15 @@ namespace GiamSat.Scada
             this._btnStartStop.Text = "Start/Stop";
             this._btnStartStop.UseVisualStyleBackColor = true;
             // 
-            // tabControl1
+            // _tab
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(21, 178);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1218, 593);
-            this.tabControl1.TabIndex = 27;
+            this._tab.Controls.Add(this.tabPage1);
+            this._tab.Controls.Add(this.tabPage2);
+            this._tab.Location = new System.Drawing.Point(21, 178);
+            this._tab.Name = "_tab";
+            this._tab.SelectedIndex = 0;
+            this._tab.Size = new System.Drawing.Size(1218, 593);
+            this._tab.TabIndex = 27;
             // 
             // tabPage1
             // 
@@ -356,7 +356,7 @@ namespace GiamSat.Scada
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 808);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this._tab);
             this.Controls.Add(this._btnStartStop);
             this.Controls.Add(this.easyLabel2);
             this.Controls.Add(this.label6);
@@ -387,7 +387,7 @@ namespace GiamSat.Scada
             ((System.ComponentModel.ISupportInitialize)(this.easyLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.easyTextBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.easyTextBox4)).EndInit();
-            this.tabControl1.ResumeLayout(false);
+            this._tab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -418,7 +418,7 @@ namespace GiamSat.Scada
         private EasyScada.Winforms.Controls.EasyTextBox easyTextBox4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button _btnStartStop;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl _tab;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private LiveCharts.WinForms.CartesianChart _chart2;

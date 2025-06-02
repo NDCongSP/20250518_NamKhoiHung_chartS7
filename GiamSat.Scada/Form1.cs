@@ -58,6 +58,8 @@ namespace GiamSat.Scada
         int _xLable1 = 0, _xLable2 = 0;
         bool _isResetChart = true;
 
+        bool _isTab1 = true;// biến để xác định tab nào đang được chọn để xuất PDF.
+
         public void Start()
         {
             _cts = new CancellationTokenSource();
@@ -204,7 +206,7 @@ namespace GiamSat.Scada
                 StrokeDashArray = new System.Windows.Media.DoubleCollection(20),
                 Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(25, 130, 196)),
                 Fill = System.Windows.Media.Brushes.Transparent,
-                LineSmoothness = 0,
+                LineSmoothness = 1,
                 PointGeometrySize = 10,
                 DataLabels = true,
                 //PointGeometry = null,//hidden point
@@ -218,7 +220,7 @@ namespace GiamSat.Scada
                 StrokeThickness = 2,
                 Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 202, 58)),
                 Fill = System.Windows.Media.Brushes.Transparent,
-                LineSmoothness = 0,
+                LineSmoothness = 1,
                 PointGeometrySize = 10,
                 PointForeground =
                     new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(34, 46, 49)),
@@ -232,7 +234,7 @@ namespace GiamSat.Scada
                 StrokeThickness = 2,
                 Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(220, 47, 2)),
                 Fill = System.Windows.Media.Brushes.Transparent,
-                LineSmoothness = 0,
+                LineSmoothness = 1,
                 PointGeometrySize = 10,
                 PointForeground =
                     new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(34, 46, 49)),
@@ -325,7 +327,7 @@ namespace GiamSat.Scada
                 StrokeDashArray = new System.Windows.Media.DoubleCollection(20),
                 Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(25, 130, 196)),
                 Fill = System.Windows.Media.Brushes.Transparent,
-                LineSmoothness = 0,
+                LineSmoothness = 1,
                 PointGeometrySize = 10,
                 DataLabels = true,
                 //PointGeometry = null,//hidden point
@@ -339,7 +341,7 @@ namespace GiamSat.Scada
                 StrokeThickness = 2,
                 Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 202, 58)),
                 Fill = System.Windows.Media.Brushes.Transparent,
-                LineSmoothness = 0,
+                LineSmoothness = 1,
                 PointGeometrySize = 10,
                 PointForeground =
                     new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(34, 46, 49)),
@@ -353,7 +355,7 @@ namespace GiamSat.Scada
                 StrokeThickness = 2,
                 Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(220, 47, 2)),
                 Fill = System.Windows.Media.Brushes.Transparent,
-                LineSmoothness = 0,
+                LineSmoothness = 1,
                 PointGeometrySize = 10,
                 PointForeground =
                     new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(34, 46, 49)),
@@ -432,6 +434,20 @@ namespace GiamSat.Scada
             //    LoadDataFromFile(openFileDialog1.FileName);
             //    CapNhatChartLine();
             //}
+
+            _tab.SelectedIndexChanged += _tab_SelectedIndexChanged;
+            _tab.SelectedIndex = 1; // Mặc định chọn tab đầu tiên
+            _tab.SelectedIndex = 0; // Mặc định chọn tab đầu tiên
+        }
+
+        private void _tab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var tab = (TabControl)sender;
+
+            if (tab.SelectedIndex == 0)
+                _isTab1 = true;
+            else
+                _isTab1 = false;
         }
 
         private void _btnStartStop_Click(object sender, EventArgs e)
@@ -887,7 +903,134 @@ namespace GiamSat.Scada
 
         #endregion
 
+
         private Document CreateDocument()
+        {
+            var doc = new Document();
+            var section = doc.AddSection();
+
+            // Setup margins
+            section.PageSetup.TopMargin = "1cm";
+            section.PageSetup.BottomMargin = "1cm";
+            section.PageSetup.LeftMargin = "2cm";
+            section.PageSetup.RightMargin = "2cm";
+
+            if (_isTab1)
+            {
+                var bitmap = new Bitmap(_chart1.Width, _chart1.Height);
+                _chart1.DrawToBitmap(bitmap, _chart1.ClientRectangle);
+                bitmap.Save("torque_chart.png", ImageFormat.Png);
+            }
+            else
+            {
+                var bitmap = new Bitmap(_chart2.Width, _chart2.Height);
+                _chart2.DrawToBitmap(bitmap, _chart2.ClientRectangle);
+                bitmap.Save("torque_chart.png", ImageFormat.Png);
+            }
+
+            // Watermark (chèn trong phần thân trang, không gây trang trắng)
+            var watermark1 = section.Headers.Primary.AddParagraph("TORQUE");
+            watermark1.Format.Font.Size = 20;
+            watermark1.Format.Font.Color = Colors.LightGray;
+            watermark1.Format.Font.Bold = true;
+            watermark1.Format.Alignment = ParagraphAlignment.Center;
+            watermark1.Format.SpaceBefore = "8cm";
+
+            //// Logo bottom right
+            //var logoPath = "LogoPT.ico";
+            //if (File.Exists(logoPath))
+            //{
+            //    var image = section.Footers.Primary.AddImage(logoPath);
+            //    image.Width = "3cm";
+            //    image.LockAspectRatio = true;
+            //    image.Left = ShapePosition.Right;
+            //    image.Top = ShapePosition.Bottom;
+            //    image.WrapFormat.Style = WrapStyle.Through;
+            //}
+
+            // Title
+            var title = section.AddParagraph("CONNECTION TORQUE LOG");
+            title.Format.Font.Bold = true;
+            title.Format.Font.Size = 14;
+            title.Format.Alignment = ParagraphAlignment.Center;
+            title.Format.SpaceAfter = "0.5cm";
+
+            // Bảng thông tin trái/phải (canh đều 2 bên)
+            var infoTable = section.AddTable();
+            infoTable.Borders.Visible = false;
+            infoTable.AddColumn("7.5cm");
+            infoTable.AddColumn("3cm");
+            infoTable.AddColumn("7.5cm");
+
+            var row = infoTable.AddRow();
+            row.Cells[0].AddParagraph(
+                $"OPERATOR: {_config.Operator}\n" +
+                $"DATE: {DateTime.Now.ToString("dd MMM yy")} ({DateTime.Now.ToString("HH:mm:ss")})\n" +
+                $"TOOL: {_config.Tool}\n" +
+                $"JOB NO.: {_config.JobNo}\n" +
+                $"SERIES:{_config.Series}\n" +
+                $"TOOL S/N: {_config.ToolSN}"
+            );
+            row.Cells[2].AddParagraph(
+                $"KH-001: {_config.LogMasterSN}\n" +
+                $"TORQUEMASTER™ S/N: {_config.TorqueMasterSN}\n" +
+                $"CONSOLE S/N: {_config.ConsoleSN}"
+            );
+
+            section.AddParagraph().Format.SpaceAfter = "0.3cm";
+
+            section.AddParagraph("\nLOGGED TORQUE VALUES").Format.Font.Bold = true;
+
+            // Data Table
+            var dataTable = section.AddTable();
+            dataTable.Borders.Width = 0.75;
+            dataTable.AddColumn("6cm");
+            dataTable.AddColumn("6cm");
+            dataTable.AddColumn("6cm");
+            dataTable.Format.Alignment = ParagraphAlignment.Justify;
+
+            var header = dataTable.AddRow();
+            header.Shading.Color = Colors.LightGray;
+            header.Cells[0].AddParagraph("Connection Name").Format.Font.Bold = true;
+            header.Cells[1].AddParagraph("Target Torque\n(lb-ft)").Format.Font.Bold = true;
+            header.Cells[2].AddParagraph("Logged Torque\n(lb-ft)").Format.Font.Bold = true;
+
+
+            var dataRow = dataTable.AddRow();
+            dataRow.Cells[0].AddParagraph(_config.ConnectionName);
+            if (_isTab1)
+            {
+                dataRow.Cells[1].AddParagraph(_target1.ToString()).Format.Alignment = ParagraphAlignment.Right;
+                dataRow.Cells[2].AddParagraph(_torque1.ToString()).Format.Alignment = ParagraphAlignment.Right;
+            }
+            else
+            {
+                dataRow.Cells[1].AddParagraph(_target2.ToString()).Format.Alignment = ParagraphAlignment.Right;
+                dataRow.Cells[2].AddParagraph(_torque2.ToString()).Format.Alignment = ParagraphAlignment.Right;
+            }
+
+            // Chart Image Placeholder
+            section.AddParagraph("\n");
+            var chartImagePath = "torque_chart.png"; // Ensure chart is generated separately
+            if (File.Exists(chartImagePath))
+            {
+                var chartImage = section.AddImage(chartImagePath);
+                chartImage.Width = "16cm";
+                chartImage.LockAspectRatio = true;
+                chartImage.Top = ShapePosition.Top;
+                chartImage.Left = ShapePosition.Center;
+            }
+
+            //// Footer text (optional)
+            //var www = section.AddParagraph("www.nov.com");
+            //www.Format.Font.Color = Colors.DarkBlue;
+            //www.Format.SpaceBefore = "1cm";
+            //www.Format.Alignment = ParagraphAlignment.Left;
+
+            return doc;
+        }
+
+        private Document CreateDocumentManuPages()
         {
             var doc = new Document();
             var section = doc.AddSection();
@@ -948,7 +1091,7 @@ namespace GiamSat.Scada
                 $"TOOL S/N: {_config.ToolSN}"
             );
             row.Cells[2].AddParagraph(
-                $"LOG MASTER™ II S/N: {_config.LogMasterSN}\n" +
+                $"KH-001: {_config.LogMasterSN}\n" +
                 $"TORQUEMASTER™ S/N: {_config.TorqueMasterSN}\n" +
                 $"CONSOLE S/N: {_config.ConsoleSN}"
             );
@@ -1057,7 +1200,7 @@ namespace GiamSat.Scada
                 $"TOOL S/N: {_config.ToolSN}"
             );
             row2.Cells[2].AddParagraph(
-                $"LOG MASTER™ II S/N: {_config.LogMasterSN}\n" +
+                $"KH-001: {_config.LogMasterSN}\n" +
                 $"TORQUEMASTER™ S/N: {_config.TorqueMasterSN}\n" +
                 $"CONSOLE S/N: {_config.ConsoleSN}"
             );
@@ -1107,114 +1250,6 @@ namespace GiamSat.Scada
             //www.Format.SpaceBefore = "1cm";
             //www.Format.Alignment = ParagraphAlignment.Left;
             #endregion
-
-            return doc;
-        }
-
-        private Document CreateDocumentBK()
-        {
-            var bitmap = new Bitmap(_chart1.Width, _chart1.Height);
-            _chart1.DrawToBitmap(bitmap, _chart1.ClientRectangle);
-            bitmap.Save("torque_chart.png", ImageFormat.Png);
-
-            var doc = new Document();
-            var section = doc.AddSection();
-
-            // Cài đặt lề trang
-            section.PageSetup.TopMargin = "1cm";
-            section.PageSetup.BottomMargin = "1cm";
-            section.PageSetup.LeftMargin = "1.5cm";
-            section.PageSetup.RightMargin = "1.5cm";
-
-            // ====== THÊM WATERMARK "CONFIDENTIAL" ======
-            var watermark = section.Headers.Primary.AddParagraph("CONFIDENTIAL");
-            watermark.Format.Font.Size = 50;
-            watermark.Format.Font.Color = Colors.LightGray;
-            watermark.Format.Font.Bold = true;
-            watermark.Format.Alignment = ParagraphAlignment.Center;
-            watermark.Format.SpaceBefore = "8cm"; // căn giữa chiều dọc
-
-            // ====== THÊM LOGO GÓC DƯỚI PHẢI ======
-            var logoPath = "LogoPT.png"; // bạn có thể dùng đường dẫn tuyệt đối nếu cần
-            var imageLogo = section.Footers.Primary.AddImage(logoPath);
-            imageLogo.Width = "3cm";
-            imageLogo.LockAspectRatio = true;
-            imageLogo.Left = ShapePosition.Right;
-            imageLogo.Top = ShapePosition.Bottom;
-            imageLogo.WrapFormat.Style = WrapStyle.Through;
-
-            // Tiêu đề
-            var title = section.AddParagraph("CONNECTION TORQUE LOG");
-            title.Format.Font.Size = 14;
-            title.Format.Font.Bold = true;
-            title.Format.Alignment = ParagraphAlignment.Center;
-            title.Format.SpaceAfter = "0.5cm";
-
-            // Bảng thông tin đầu trang
-            MigraDoc.DocumentObjectModel.Tables.Table infoTable = section.AddTable();
-            infoTable.AddColumn("7cm");
-            infoTable.AddColumn("7cm");
-
-            void AddInfoRow(string left, string right)
-            {
-                var row = infoTable.AddRow();
-                row.Cells[0].AddParagraph(left);
-                row.Cells[1].AddParagraph(right);
-                row.Cells[0].Format.Alignment = ParagraphAlignment.Justify;
-                row.Cells[1].Format.Alignment = ParagraphAlignment.Justify;
-            }
-
-            AddInfoRow("OPERATOR: ZAHADI", "LOG MASTER™ II S/N: LM2-586");
-            AddInfoRow("DATE: 09 APR 25 (10:29:50)", "TORQUEMASTER™ S/N: 8025 - 5020");
-            AddInfoRow("TOOL: Series Jar", "CONSOLE S/N: 8018 - 5032");
-            AddInfoRow("JOB NO.: ASSEMBLE HQ650 JAR", "");
-            AddInfoRow("SERIES:", "");
-            AddInfoRow("TOOL S/N: OSC115748A", "");
-
-            // Tiêu đề bảng dữ liệu
-            //section.AddParagraph("\nLOGGED TORQUE VALUES").Format.Font.Bold = true;
-            var logTitle = section.AddParagraph("\nLOGGED TORQUE VALUES");
-            logTitle.Format.Font.Bold = true;
-            logTitle.Format.Alignment = ParagraphAlignment.Justify;
-
-            // Bảng dữ liệu torque
-            MigraDoc.DocumentObjectModel.Tables.Table dataTable = section.AddTable();
-            dataTable.Borders.Width = 0.5;
-            dataTable.AddColumn("2cm");
-            dataTable.AddColumn("5cm");
-            dataTable.AddColumn("4cm");
-            dataTable.AddColumn("4cm");
-
-            var headerRow = dataTable.AddRow();
-            headerRow.Shading.Color = Colors.LightGray;
-            headerRow.Cells[0].AddParagraph(" ");
-            headerRow.Cells[1].AddParagraph("Connection Name");
-            headerRow.Cells[2].AddParagraph("Target Torque\n(lb-ft)");
-            headerRow.Cells[3].AddParagraph("Logged Torque\n(lb-ft)");
-
-            var dataRow = dataTable.AddRow();
-            dataRow.Cells[0].AddParagraph("1");
-            dataRow.Cells[1].AddParagraph("LFJ-KM");
-            dataRow.Cells[2].AddParagraph("40,600");
-            dataRow.Cells[3].AddParagraph("40,960");
-
-            section.AddParagraph("\n");
-
-            // Thêm hình ảnh biểu đồ torque nếu có
-            string chartImagePath = Path.Combine(Application.StartupPath, "torque_chart.png");
-            if (File.Exists(chartImagePath))
-            {
-                var image = section.AddImage(chartImagePath);
-                image.Width = "16cm";
-                image.LockAspectRatio = true;
-            }
-            else
-            {
-                section.AddParagraph("[Không tìm thấy ảnh biểu đồ]");
-            }
-
-            // Footer website
-            section.AddParagraph("\nwww.nov.com").Format.Alignment = ParagraphAlignment.Left;
 
             return doc;
         }

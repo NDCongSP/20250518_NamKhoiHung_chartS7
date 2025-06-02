@@ -12,5 +12,5 @@
   "Target": 0.0,
   "LoggedTorque": 0.0,
   "LogInterval": 1000,
-  "maxPoints": 25
+  "maxPoints": 20
 }
