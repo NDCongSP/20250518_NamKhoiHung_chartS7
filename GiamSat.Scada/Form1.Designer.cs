@@ -38,30 +38,30 @@ namespace GiamSat.Scada
             this._btnUpdate = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this._btnExport = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.easyTextBox1 = new EasyScada.Winforms.Controls.EasyTextBox();
-            this.easyTextBox2 = new EasyScada.Winforms.Controls.EasyTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.easyLabel1 = new EasyScada.Winforms.Controls.EasyLabel();
-            this.easyLabel2 = new EasyScada.Winforms.Controls.EasyLabel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.easyTextBox3 = new EasyScada.Winforms.Controls.EasyTextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.easyTextBox4 = new EasyScada.Winforms.Controls.EasyTextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this._labMax1 = new System.Windows.Forms.Label();
+            this._easyTextBoxMax1 = new EasyScada.Winforms.Controls.EasyTextBox();
+            this._easyTextBoxTarget1 = new EasyScada.Winforms.Controls.EasyTextBox();
+            this._labTarget1 = new System.Windows.Forms.Label();
+            this._labTorque1 = new System.Windows.Forms.Label();
+            this._easyLabelTorque1 = new EasyScada.Winforms.Controls.EasyLabel();
+            this._easyLabelTorque2 = new EasyScada.Winforms.Controls.EasyLabel();
+            this._labTorque2 = new System.Windows.Forms.Label();
+            this._easyTextBoxTarget2 = new EasyScada.Winforms.Controls.EasyTextBox();
+            this._labTarget2 = new System.Windows.Forms.Label();
+            this._easyTextBoxMax2 = new EasyScada.Winforms.Controls.EasyTextBox();
+            this._labMax2 = new System.Windows.Forms.Label();
             this._btnStartStop = new System.Windows.Forms.Button();
             this._tab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this._chart2 = new LiveCharts.WinForms.CartesianChart();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.easyTextBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.easyTextBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.easyLabel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.easyLabel2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.easyTextBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.easyTextBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyTextBoxMax1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyTextBoxTarget1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyLabelTorque1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyLabelTorque2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyTextBoxTarget2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyTextBoxMax2)).BeginInit();
             this._tab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -141,165 +141,165 @@ namespace GiamSat.Scada
             this._btnExport.Text = "Export PDF";
             this._btnExport.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // _labMax1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.Location = new System.Drawing.Point(18, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 17);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Max 1";
+            this._labMax1.AutoSize = true;
+            this._labMax1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._labMax1.Location = new System.Drawing.Point(18, 92);
+            this._labMax1.Name = "_labMax1";
+            this._labMax1.Size = new System.Drawing.Size(45, 17);
+            this._labMax1.TabIndex = 14;
+            this._labMax1.Text = "Max 1";
             // 
-            // easyTextBox1
+            // _easyTextBoxMax1
             // 
-            this.easyTextBox1.DropDownBackColor = System.Drawing.SystemColors.Control;
-            this.easyTextBox1.DropDownBorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.easyTextBox1.DropDownDirection = EasyScada.Winforms.Controls.DropDownDirection.None;
-            this.easyTextBox1.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.easyTextBox1.DropDownForeColor = System.Drawing.SystemColors.ControlText;
-            this.easyTextBox1.HightLightStatusTime = 3;
-            this.easyTextBox1.Location = new System.Drawing.Point(66, 90);
-            this.easyTextBox1.Name = "easyTextBox1";
-            this.easyTextBox1.Role = null;
-            this.easyTextBox1.Size = new System.Drawing.Size(100, 20);
-            this.easyTextBox1.StringFormat = null;
-            this.easyTextBox1.TabIndex = 15;
-            this.easyTextBox1.TagPath = "Local Station/Channel1/Device1/Max1";
-            this.easyTextBox1.Text = "easyTextBox1";
-            this.easyTextBox1.WriteDelay = 200;
-            this.easyTextBox1.WriteTrigger = EasyScada.Core.WriteTrigger.OnEnter;
+            this._easyTextBoxMax1.DropDownBackColor = System.Drawing.SystemColors.Control;
+            this._easyTextBoxMax1.DropDownBorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._easyTextBoxMax1.DropDownDirection = EasyScada.Winforms.Controls.DropDownDirection.None;
+            this._easyTextBoxMax1.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._easyTextBoxMax1.DropDownForeColor = System.Drawing.SystemColors.ControlText;
+            this._easyTextBoxMax1.HightLightStatusTime = 3;
+            this._easyTextBoxMax1.Location = new System.Drawing.Point(66, 90);
+            this._easyTextBoxMax1.Name = "_easyTextBoxMax1";
+            this._easyTextBoxMax1.Role = null;
+            this._easyTextBoxMax1.Size = new System.Drawing.Size(100, 20);
+            this._easyTextBoxMax1.StringFormat = null;
+            this._easyTextBoxMax1.TabIndex = 15;
+            this._easyTextBoxMax1.TagPath = "Local Station/Channel1/Device1/Max1";
+            this._easyTextBoxMax1.Text = "easyTextBox1";
+            this._easyTextBoxMax1.WriteDelay = 200;
+            this._easyTextBoxMax1.WriteTrigger = EasyScada.Core.WriteTrigger.OnEnter;
             // 
-            // easyTextBox2
+            // _easyTextBoxTarget1
             // 
-            this.easyTextBox2.DropDownBackColor = System.Drawing.SystemColors.Control;
-            this.easyTextBox2.DropDownBorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.easyTextBox2.DropDownDirection = EasyScada.Winforms.Controls.DropDownDirection.None;
-            this.easyTextBox2.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.easyTextBox2.DropDownForeColor = System.Drawing.SystemColors.ControlText;
-            this.easyTextBox2.HightLightStatusTime = 3;
-            this.easyTextBox2.Location = new System.Drawing.Point(320, 90);
-            this.easyTextBox2.Name = "easyTextBox2";
-            this.easyTextBox2.Role = null;
-            this.easyTextBox2.Size = new System.Drawing.Size(100, 20);
-            this.easyTextBox2.StringFormat = null;
-            this.easyTextBox2.TabIndex = 17;
-            this.easyTextBox2.TagPath = "Local Station/Channel1/Device1/Target1";
-            this.easyTextBox2.Text = "easyTextBox2";
-            this.easyTextBox2.WriteDelay = 200;
-            this.easyTextBox2.WriteTrigger = EasyScada.Core.WriteTrigger.OnEnter;
+            this._easyTextBoxTarget1.DropDownBackColor = System.Drawing.SystemColors.Control;
+            this._easyTextBoxTarget1.DropDownBorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._easyTextBoxTarget1.DropDownDirection = EasyScada.Winforms.Controls.DropDownDirection.None;
+            this._easyTextBoxTarget1.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._easyTextBoxTarget1.DropDownForeColor = System.Drawing.SystemColors.ControlText;
+            this._easyTextBoxTarget1.HightLightStatusTime = 3;
+            this._easyTextBoxTarget1.Location = new System.Drawing.Point(320, 90);
+            this._easyTextBoxTarget1.Name = "_easyTextBoxTarget1";
+            this._easyTextBoxTarget1.Role = null;
+            this._easyTextBoxTarget1.Size = new System.Drawing.Size(100, 20);
+            this._easyTextBoxTarget1.StringFormat = null;
+            this._easyTextBoxTarget1.TabIndex = 17;
+            this._easyTextBoxTarget1.TagPath = "Local Station/Channel1/Device1/Target1";
+            this._easyTextBoxTarget1.Text = "easyTextBox2";
+            this._easyTextBoxTarget1.WriteDelay = 200;
+            this._easyTextBoxTarget1.WriteTrigger = EasyScada.Core.WriteTrigger.OnEnter;
             // 
-            // label3
+            // _labTarget1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label3.Location = new System.Drawing.Point(243, 92);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 17);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Target 1";
+            this._labTarget1.AutoSize = true;
+            this._labTarget1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._labTarget1.Location = new System.Drawing.Point(243, 92);
+            this._labTarget1.Name = "_labTarget1";
+            this._labTarget1.Size = new System.Drawing.Size(62, 17);
+            this._labTarget1.TabIndex = 16;
+            this._labTarget1.Text = "Target 1";
             // 
-            // label5
+            // _labTorque1
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label5.Location = new System.Drawing.Point(485, 92);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 17);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Torque Value 1";
+            this._labTorque1.AutoSize = true;
+            this._labTorque1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._labTorque1.Location = new System.Drawing.Point(485, 92);
+            this._labTorque1.Name = "_labTorque1";
+            this._labTorque1.Size = new System.Drawing.Size(106, 17);
+            this._labTorque1.TabIndex = 18;
+            this._labTorque1.Text = "Torque Value 1";
             // 
-            // easyLabel1
+            // _easyLabelTorque1
             // 
-            this.easyLabel1.DisplayMode = EasyScada.Winforms.Controls.DisplayMode.Value;
-            this.easyLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.easyLabel1.Location = new System.Drawing.Point(597, 92);
-            this.easyLabel1.Name = "easyLabel1";
-            this.easyLabel1.Size = new System.Drawing.Size(100, 23);
-            this.easyLabel1.StringFormat = null;
-            this.easyLabel1.TabIndex = 19;
-            this.easyLabel1.TagPath = "Local Station/Channel1/Device1/Value1";
-            this.easyLabel1.Text = "easyLabel1";
+            this._easyLabelTorque1.DisplayMode = EasyScada.Winforms.Controls.DisplayMode.Value;
+            this._easyLabelTorque1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._easyLabelTorque1.Location = new System.Drawing.Point(597, 92);
+            this._easyLabelTorque1.Name = "_easyLabelTorque1";
+            this._easyLabelTorque1.Size = new System.Drawing.Size(100, 23);
+            this._easyLabelTorque1.StringFormat = null;
+            this._easyLabelTorque1.TabIndex = 19;
+            this._easyLabelTorque1.TagPath = "Local Station/Channel1/Device1/Value1";
+            this._easyLabelTorque1.Text = "easyLabel1";
             // 
-            // easyLabel2
+            // _easyLabelTorque2
             // 
-            this.easyLabel2.DisplayMode = EasyScada.Winforms.Controls.DisplayMode.Value;
-            this.easyLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.easyLabel2.Location = new System.Drawing.Point(597, 135);
-            this.easyLabel2.Name = "easyLabel2";
-            this.easyLabel2.Size = new System.Drawing.Size(100, 23);
-            this.easyLabel2.StringFormat = null;
-            this.easyLabel2.TabIndex = 25;
-            this.easyLabel2.TagPath = "Local Station/Channel1/Device1/Value2";
-            this.easyLabel2.Text = "easyLabel2";
+            this._easyLabelTorque2.DisplayMode = EasyScada.Winforms.Controls.DisplayMode.Value;
+            this._easyLabelTorque2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._easyLabelTorque2.Location = new System.Drawing.Point(597, 135);
+            this._easyLabelTorque2.Name = "_easyLabelTorque2";
+            this._easyLabelTorque2.Size = new System.Drawing.Size(100, 23);
+            this._easyLabelTorque2.StringFormat = null;
+            this._easyLabelTorque2.TabIndex = 25;
+            this._easyLabelTorque2.TagPath = "Local Station/Channel1/Device1/Value2";
+            this._easyLabelTorque2.Text = "easyLabel2";
             // 
-            // label6
+            // _labTorque2
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label6.Location = new System.Drawing.Point(485, 135);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 17);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "Torque Value 2";
+            this._labTorque2.AutoSize = true;
+            this._labTorque2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._labTorque2.Location = new System.Drawing.Point(485, 135);
+            this._labTorque2.Name = "_labTorque2";
+            this._labTorque2.Size = new System.Drawing.Size(106, 17);
+            this._labTorque2.TabIndex = 24;
+            this._labTorque2.Text = "Torque Value 2";
             // 
-            // easyTextBox3
+            // _easyTextBoxTarget2
             // 
-            this.easyTextBox3.DropDownBackColor = System.Drawing.SystemColors.Control;
-            this.easyTextBox3.DropDownBorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.easyTextBox3.DropDownDirection = EasyScada.Winforms.Controls.DropDownDirection.None;
-            this.easyTextBox3.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.easyTextBox3.DropDownForeColor = System.Drawing.SystemColors.ControlText;
-            this.easyTextBox3.HightLightStatusTime = 3;
-            this.easyTextBox3.Location = new System.Drawing.Point(320, 133);
-            this.easyTextBox3.Name = "easyTextBox3";
-            this.easyTextBox3.Role = null;
-            this.easyTextBox3.Size = new System.Drawing.Size(100, 20);
-            this.easyTextBox3.StringFormat = null;
-            this.easyTextBox3.TabIndex = 23;
-            this.easyTextBox3.TagPath = "Local Station/Channel1/Device1/Target2";
-            this.easyTextBox3.Text = "easyTextBox3";
-            this.easyTextBox3.WriteDelay = 200;
-            this.easyTextBox3.WriteTrigger = EasyScada.Core.WriteTrigger.OnEnter;
+            this._easyTextBoxTarget2.DropDownBackColor = System.Drawing.SystemColors.Control;
+            this._easyTextBoxTarget2.DropDownBorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._easyTextBoxTarget2.DropDownDirection = EasyScada.Winforms.Controls.DropDownDirection.None;
+            this._easyTextBoxTarget2.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._easyTextBoxTarget2.DropDownForeColor = System.Drawing.SystemColors.ControlText;
+            this._easyTextBoxTarget2.HightLightStatusTime = 3;
+            this._easyTextBoxTarget2.Location = new System.Drawing.Point(320, 133);
+            this._easyTextBoxTarget2.Name = "_easyTextBoxTarget2";
+            this._easyTextBoxTarget2.Role = null;
+            this._easyTextBoxTarget2.Size = new System.Drawing.Size(100, 20);
+            this._easyTextBoxTarget2.StringFormat = null;
+            this._easyTextBoxTarget2.TabIndex = 23;
+            this._easyTextBoxTarget2.TagPath = "Local Station/Channel1/Device1/Target2";
+            this._easyTextBoxTarget2.Text = "easyTextBox3";
+            this._easyTextBoxTarget2.WriteDelay = 200;
+            this._easyTextBoxTarget2.WriteTrigger = EasyScada.Core.WriteTrigger.OnEnter;
             // 
-            // label7
+            // _labTarget2
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label7.Location = new System.Drawing.Point(243, 135);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 17);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Target 2";
+            this._labTarget2.AutoSize = true;
+            this._labTarget2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._labTarget2.Location = new System.Drawing.Point(243, 135);
+            this._labTarget2.Name = "_labTarget2";
+            this._labTarget2.Size = new System.Drawing.Size(62, 17);
+            this._labTarget2.TabIndex = 22;
+            this._labTarget2.Text = "Target 2";
             // 
-            // easyTextBox4
+            // _easyTextBoxMax2
             // 
-            this.easyTextBox4.DropDownBackColor = System.Drawing.SystemColors.Control;
-            this.easyTextBox4.DropDownBorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.easyTextBox4.DropDownDirection = EasyScada.Winforms.Controls.DropDownDirection.None;
-            this.easyTextBox4.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.easyTextBox4.DropDownForeColor = System.Drawing.SystemColors.ControlText;
-            this.easyTextBox4.HightLightStatusTime = 3;
-            this.easyTextBox4.Location = new System.Drawing.Point(66, 133);
-            this.easyTextBox4.Name = "easyTextBox4";
-            this.easyTextBox4.Role = null;
-            this.easyTextBox4.Size = new System.Drawing.Size(100, 20);
-            this.easyTextBox4.StringFormat = null;
-            this.easyTextBox4.TabIndex = 21;
-            this.easyTextBox4.TagPath = "Local Station/Channel1/Device1/Max2";
-            this.easyTextBox4.Text = "easyTextBox4";
-            this.easyTextBox4.WriteDelay = 200;
-            this.easyTextBox4.WriteTrigger = EasyScada.Core.WriteTrigger.OnEnter;
+            this._easyTextBoxMax2.DropDownBackColor = System.Drawing.SystemColors.Control;
+            this._easyTextBoxMax2.DropDownBorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._easyTextBoxMax2.DropDownDirection = EasyScada.Winforms.Controls.DropDownDirection.None;
+            this._easyTextBoxMax2.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._easyTextBoxMax2.DropDownForeColor = System.Drawing.SystemColors.ControlText;
+            this._easyTextBoxMax2.HightLightStatusTime = 3;
+            this._easyTextBoxMax2.Location = new System.Drawing.Point(66, 133);
+            this._easyTextBoxMax2.Name = "_easyTextBoxMax2";
+            this._easyTextBoxMax2.Role = null;
+            this._easyTextBoxMax2.Size = new System.Drawing.Size(100, 20);
+            this._easyTextBoxMax2.StringFormat = null;
+            this._easyTextBoxMax2.TabIndex = 21;
+            this._easyTextBoxMax2.TagPath = "Local Station/Channel1/Device1/Max2";
+            this._easyTextBoxMax2.Text = "easyTextBox4";
+            this._easyTextBoxMax2.WriteDelay = 200;
+            this._easyTextBoxMax2.WriteTrigger = EasyScada.Core.WriteTrigger.OnEnter;
             // 
-            // label8
+            // _labMax2
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label8.Location = new System.Drawing.Point(18, 135);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(45, 17);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "Max 2";
+            this._labMax2.AutoSize = true;
+            this._labMax2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this._labMax2.Location = new System.Drawing.Point(18, 135);
+            this._labMax2.Name = "_labMax2";
+            this._labMax2.Size = new System.Drawing.Size(45, 17);
+            this._labMax2.TabIndex = 20;
+            this._labMax2.Text = "Max 2";
             // 
             // _btnStartStop
             // 
@@ -358,18 +358,18 @@ namespace GiamSat.Scada
             this.ClientSize = new System.Drawing.Size(1264, 808);
             this.Controls.Add(this._tab);
             this.Controls.Add(this._btnStartStop);
-            this.Controls.Add(this.easyLabel2);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.easyTextBox3);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.easyTextBox4);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.easyLabel1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.easyTextBox2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.easyTextBox1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this._easyLabelTorque2);
+            this.Controls.Add(this._labTorque2);
+            this.Controls.Add(this._easyTextBoxTarget2);
+            this.Controls.Add(this._labTarget2);
+            this.Controls.Add(this._easyTextBoxMax2);
+            this.Controls.Add(this._labMax2);
+            this.Controls.Add(this._easyLabelTorque1);
+            this.Controls.Add(this._labTorque1);
+            this.Controls.Add(this._easyTextBoxTarget1);
+            this.Controls.Add(this._labTarget1);
+            this.Controls.Add(this._easyTextBoxMax1);
+            this.Controls.Add(this._labMax1);
             this.Controls.Add(this._btnExport);
             this.Controls.Add(this._btnUpdate);
             this.Controls.Add(this.label1);
@@ -381,12 +381,12 @@ namespace GiamSat.Scada
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CHART DRAWING";
-            ((System.ComponentModel.ISupportInitialize)(this.easyTextBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.easyTextBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.easyLabel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.easyLabel2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.easyTextBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.easyTextBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyTextBoxMax1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyTextBoxTarget1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyLabelTorque1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyLabelTorque2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyTextBoxTarget2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._easyTextBoxMax2)).EndInit();
             this._tab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -405,18 +405,18 @@ namespace GiamSat.Scada
         private System.Windows.Forms.Button _btnUpdate;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button _btnExport;
-        private System.Windows.Forms.Label label2;
-        private EasyScada.Winforms.Controls.EasyTextBox easyTextBox1;
-        private EasyScada.Winforms.Controls.EasyTextBox easyTextBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label5;
-        private EasyScada.Winforms.Controls.EasyLabel easyLabel1;
-        private EasyScada.Winforms.Controls.EasyLabel easyLabel2;
-        private System.Windows.Forms.Label label6;
-        private EasyScada.Winforms.Controls.EasyTextBox easyTextBox3;
-        private System.Windows.Forms.Label label7;
-        private EasyScada.Winforms.Controls.EasyTextBox easyTextBox4;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label _labMax1;
+        private EasyScada.Winforms.Controls.EasyTextBox _easyTextBoxMax1;
+        private EasyScada.Winforms.Controls.EasyTextBox _easyTextBoxTarget1;
+        private System.Windows.Forms.Label _labTarget1;
+        private System.Windows.Forms.Label _labTorque1;
+        private EasyScada.Winforms.Controls.EasyLabel _easyLabelTorque1;
+        private EasyScada.Winforms.Controls.EasyLabel _easyLabelTorque2;
+        private System.Windows.Forms.Label _labTorque2;
+        private EasyScada.Winforms.Controls.EasyTextBox _easyTextBoxTarget2;
+        private System.Windows.Forms.Label _labTarget2;
+        private EasyScada.Winforms.Controls.EasyTextBox _easyTextBoxMax2;
+        private System.Windows.Forms.Label _labMax2;
         private System.Windows.Forms.Button _btnStartStop;
         private System.Windows.Forms.TabControl _tab;
         private System.Windows.Forms.TabPage tabPage1;

@@ -445,9 +445,19 @@ namespace GiamSat.Scada
             var tab = (TabControl)sender;
 
             if (tab.SelectedIndex == 0)
+            {
                 _isTab1 = true;
+
+                _labMax1.Visible = _labTarget1.Visible = _labTorque1.Visible = _easyTextBoxMax1.Visible = _easyTextBoxTarget1.Visible = _easyLabelTorque1.Visible = true;
+                _labMax2.Visible = _labTarget2.Visible = _labTorque2.Visible = _easyTextBoxMax2.Visible = _easyTextBoxTarget2.Visible = _easyLabelTorque2.Visible = false;
+            }
             else
+            {
                 _isTab1 = false;
+                
+                _labMax1.Visible = _labTarget1.Visible = _labTorque1.Visible = _easyTextBoxMax1.Visible = _easyTextBoxTarget1.Visible = _easyLabelTorque1.Visible = false;
+                _labMax2.Visible = _labTarget2.Visible = _labTorque2.Visible = _easyTextBoxMax2.Visible = _easyTextBoxTarget2.Visible = _easyLabelTorque2.Visible = true;
+            }
         }
 
         private void _btnStartStop_Click(object sender, EventArgs e)
