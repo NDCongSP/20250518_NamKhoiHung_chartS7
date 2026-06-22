@@ -69,9 +69,10 @@ namespace GiamSat.Scada
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(8, 774);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(8, 654);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(127, 20);
             this.label4.TabIndex = 6;
@@ -79,9 +80,10 @@ namespace GiamSat.Scada
             // 
             // _labSriverStatus
             // 
+            this._labSriverStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this._labSriverStatus.AutoSize = true;
-            this._labSriverStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._labSriverStatus.Location = new System.Drawing.Point(132, 774);
+            this._labSriverStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._labSriverStatus.Location = new System.Drawing.Point(130, 654);
             this._labSriverStatus.Name = "_labSriverStatus";
             this._labSriverStatus.Size = new System.Drawing.Size(98, 20);
             this._labSriverStatus.TabIndex = 5;
@@ -89,40 +91,44 @@ namespace GiamSat.Scada
             // 
             // _labTime
             // 
-            this._labTime.AutoSize = true;
-            this._labTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._labTime.Location = new System.Drawing.Point(1069, 774);
+            this._labTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this._labTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._labTime.Location = new System.Drawing.Point(810, 654);
             this._labTime.Name = "_labTime";
-            this._labTime.Size = new System.Drawing.Size(183, 20);
+            this._labTime.Size = new System.Drawing.Size(178, 20);
             this._labTime.TabIndex = 2;
             this._labTime.Text = "dd/MM/YYYY HH:mm:ss";
             this._labTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.BackColor = System.Drawing.Color.Blue;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(-1, 0);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1267, 64);
+            this.label1.Size = new System.Drawing.Size(1000, 50);
             this.label1.TabIndex = 7;
             this.label1.Text = "CONNECTION TORQUE LOG";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // _chart1
             // 
-            this._chart1.Location = new System.Drawing.Point(6, 6);
+            this._chart1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._chart1.Location = new System.Drawing.Point(3, 3);
             this._chart1.Name = "_chart1";
-            this._chart1.Size = new System.Drawing.Size(1198, 555);
+            this._chart1.Size = new System.Drawing.Size(970, 482);
             this._chart1.TabIndex = 11;
             this._chart1.Text = "cartesianChart1";
             // 
             // _btnUpdate
             // 
-            this._btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this._btnUpdate.Location = new System.Drawing.Point(1015, 77);
+            this._btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this._btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this._btnUpdate.Location = new System.Drawing.Point(810, 56);
             this._btnUpdate.Name = "_btnUpdate";
-            this._btnUpdate.Size = new System.Drawing.Size(224, 37);
+            this._btnUpdate.Size = new System.Drawing.Size(178, 33);
             this._btnUpdate.TabIndex = 12;
             this._btnUpdate.Text = "Update Information";
             this._btnUpdate.UseVisualStyleBackColor = true;
@@ -133,10 +139,11 @@ namespace GiamSat.Scada
             // 
             // _btnExport
             // 
-            this._btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this._btnExport.Location = new System.Drawing.Point(1015, 120);
+            this._btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this._btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this._btnExport.Location = new System.Drawing.Point(810, 95);
             this._btnExport.Name = "_btnExport";
-            this._btnExport.Size = new System.Drawing.Size(224, 37);
+            this._btnExport.Size = new System.Drawing.Size(178, 33);
             this._btnExport.TabIndex = 13;
             this._btnExport.Text = "Export PDF";
             this._btnExport.UseVisualStyleBackColor = true;
@@ -145,7 +152,7 @@ namespace GiamSat.Scada
             // 
             this._labMax1.AutoSize = true;
             this._labMax1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this._labMax1.Location = new System.Drawing.Point(18, 92);
+            this._labMax1.Location = new System.Drawing.Point(12, 66);
             this._labMax1.Name = "_labMax1";
             this._labMax1.Size = new System.Drawing.Size(45, 17);
             this._labMax1.TabIndex = 14;
@@ -159,7 +166,7 @@ namespace GiamSat.Scada
             this._easyTextBoxMax1.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this._easyTextBoxMax1.DropDownForeColor = System.Drawing.SystemColors.ControlText;
             this._easyTextBoxMax1.HightLightStatusTime = 3;
-            this._easyTextBoxMax1.Location = new System.Drawing.Point(66, 90);
+            this._easyTextBoxMax1.Location = new System.Drawing.Point(60, 64);
             this._easyTextBoxMax1.Name = "_easyTextBoxMax1";
             this._easyTextBoxMax1.Role = null;
             this._easyTextBoxMax1.Size = new System.Drawing.Size(100, 20);
@@ -178,7 +185,7 @@ namespace GiamSat.Scada
             this._easyTextBoxTarget1.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this._easyTextBoxTarget1.DropDownForeColor = System.Drawing.SystemColors.ControlText;
             this._easyTextBoxTarget1.HightLightStatusTime = 3;
-            this._easyTextBoxTarget1.Location = new System.Drawing.Point(320, 90);
+            this._easyTextBoxTarget1.Location = new System.Drawing.Point(230, 64);
             this._easyTextBoxTarget1.Name = "_easyTextBoxTarget1";
             this._easyTextBoxTarget1.Role = null;
             this._easyTextBoxTarget1.Size = new System.Drawing.Size(100, 20);
@@ -193,7 +200,7 @@ namespace GiamSat.Scada
             // 
             this._labTarget1.AutoSize = true;
             this._labTarget1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this._labTarget1.Location = new System.Drawing.Point(243, 92);
+            this._labTarget1.Location = new System.Drawing.Point(160, 66);
             this._labTarget1.Name = "_labTarget1";
             this._labTarget1.Size = new System.Drawing.Size(62, 17);
             this._labTarget1.TabIndex = 16;
@@ -203,7 +210,7 @@ namespace GiamSat.Scada
             // 
             this._labTorque1.AutoSize = true;
             this._labTorque1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this._labTorque1.Location = new System.Drawing.Point(485, 92);
+            this._labTorque1.Location = new System.Drawing.Point(330, 66);
             this._labTorque1.Name = "_labTorque1";
             this._labTorque1.Size = new System.Drawing.Size(106, 17);
             this._labTorque1.TabIndex = 18;
@@ -213,7 +220,7 @@ namespace GiamSat.Scada
             // 
             this._easyLabelTorque1.DisplayMode = EasyScada.Winforms.Controls.DisplayMode.Value;
             this._easyLabelTorque1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this._easyLabelTorque1.Location = new System.Drawing.Point(597, 92);
+            this._easyLabelTorque1.Location = new System.Drawing.Point(450, 64);
             this._easyLabelTorque1.Name = "_easyLabelTorque1";
             this._easyLabelTorque1.Size = new System.Drawing.Size(100, 23);
             this._easyLabelTorque1.StringFormat = null;
@@ -225,7 +232,7 @@ namespace GiamSat.Scada
             // 
             this._easyLabelTorque2.DisplayMode = EasyScada.Winforms.Controls.DisplayMode.Value;
             this._easyLabelTorque2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this._easyLabelTorque2.Location = new System.Drawing.Point(597, 135);
+            this._easyLabelTorque2.Location = new System.Drawing.Point(450, 98);
             this._easyLabelTorque2.Name = "_easyLabelTorque2";
             this._easyLabelTorque2.Size = new System.Drawing.Size(100, 23);
             this._easyLabelTorque2.StringFormat = null;
@@ -237,7 +244,7 @@ namespace GiamSat.Scada
             // 
             this._labTorque2.AutoSize = true;
             this._labTorque2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this._labTorque2.Location = new System.Drawing.Point(485, 135);
+            this._labTorque2.Location = new System.Drawing.Point(330, 100);
             this._labTorque2.Name = "_labTorque2";
             this._labTorque2.Size = new System.Drawing.Size(106, 17);
             this._labTorque2.TabIndex = 24;
@@ -251,7 +258,7 @@ namespace GiamSat.Scada
             this._easyTextBoxTarget2.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this._easyTextBoxTarget2.DropDownForeColor = System.Drawing.SystemColors.ControlText;
             this._easyTextBoxTarget2.HightLightStatusTime = 3;
-            this._easyTextBoxTarget2.Location = new System.Drawing.Point(320, 133);
+            this._easyTextBoxTarget2.Location = new System.Drawing.Point(230, 98);
             this._easyTextBoxTarget2.Name = "_easyTextBoxTarget2";
             this._easyTextBoxTarget2.Role = null;
             this._easyTextBoxTarget2.Size = new System.Drawing.Size(100, 20);
@@ -266,7 +273,7 @@ namespace GiamSat.Scada
             // 
             this._labTarget2.AutoSize = true;
             this._labTarget2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this._labTarget2.Location = new System.Drawing.Point(243, 135);
+            this._labTarget2.Location = new System.Drawing.Point(160, 100);
             this._labTarget2.Name = "_labTarget2";
             this._labTarget2.Size = new System.Drawing.Size(62, 17);
             this._labTarget2.TabIndex = 22;
@@ -280,7 +287,7 @@ namespace GiamSat.Scada
             this._easyTextBoxMax2.DropDownFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this._easyTextBoxMax2.DropDownForeColor = System.Drawing.SystemColors.ControlText;
             this._easyTextBoxMax2.HightLightStatusTime = 3;
-            this._easyTextBoxMax2.Location = new System.Drawing.Point(66, 133);
+            this._easyTextBoxMax2.Location = new System.Drawing.Point(60, 98);
             this._easyTextBoxMax2.Name = "_easyTextBoxMax2";
             this._easyTextBoxMax2.Role = null;
             this._easyTextBoxMax2.Size = new System.Drawing.Size(100, 20);
@@ -295,7 +302,7 @@ namespace GiamSat.Scada
             // 
             this._labMax2.AutoSize = true;
             this._labMax2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this._labMax2.Location = new System.Drawing.Point(18, 135);
+            this._labMax2.Location = new System.Drawing.Point(12, 100);
             this._labMax2.Name = "_labMax2";
             this._labMax2.Size = new System.Drawing.Size(45, 17);
             this._labMax2.TabIndex = 20;
@@ -303,22 +310,26 @@ namespace GiamSat.Scada
             // 
             // _btnStartStop
             // 
-            this._btnStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
-            this._btnStartStop.Location = new System.Drawing.Point(740, 77);
+            this._btnStartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this._btnStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold);
+            this._btnStartStop.Location = new System.Drawing.Point(600, 56);
             this._btnStartStop.Name = "_btnStartStop";
-            this._btnStartStop.Size = new System.Drawing.Size(246, 80);
+            this._btnStartStop.Size = new System.Drawing.Size(190, 72);
             this._btnStartStop.TabIndex = 26;
             this._btnStartStop.Text = "Start/Stop";
             this._btnStartStop.UseVisualStyleBackColor = true;
             // 
             // _tab
             // 
+            this._tab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._tab.Controls.Add(this.tabPage1);
             this._tab.Controls.Add(this.tabPage2);
-            this._tab.Location = new System.Drawing.Point(21, 178);
+            this._tab.Location = new System.Drawing.Point(12, 134);
             this._tab.Name = "_tab";
             this._tab.SelectedIndex = 0;
-            this._tab.Size = new System.Drawing.Size(1218, 593);
+            this._tab.Size = new System.Drawing.Size(976, 512);
             this._tab.TabIndex = 27;
             // 
             // tabPage1
@@ -327,7 +338,7 @@ namespace GiamSat.Scada
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1210, 567);
+            this.tabPage1.Size = new System.Drawing.Size(968, 486);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TORQUE 1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -338,16 +349,17 @@ namespace GiamSat.Scada
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1210, 567);
+            this.tabPage2.Size = new System.Drawing.Size(968, 486);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "TORQUE 2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // _chart2
             // 
-            this._chart2.Location = new System.Drawing.Point(6, 6);
+            this._chart2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._chart2.Location = new System.Drawing.Point(3, 3);
             this._chart2.Name = "_chart2";
-            this._chart2.Size = new System.Drawing.Size(1198, 555);
+            this._chart2.Size = new System.Drawing.Size(970, 482);
             this._chart2.TabIndex = 12;
             this._chart2.Text = "cartesianChart1";
             // 
@@ -355,7 +367,8 @@ namespace GiamSat.Scada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 808);
+            this.ClientSize = new System.Drawing.Size(1000, 680);
+            this.MinimumSize = new System.Drawing.Size(820, 600);
             this.Controls.Add(this._tab);
             this.Controls.Add(this._btnStartStop);
             this.Controls.Add(this._easyLabelTorque2);
@@ -377,7 +390,7 @@ namespace GiamSat.Scada
             this.Controls.Add(this._labSriverStatus);
             this.Controls.Add(this._labTime);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
+            this.MaximizeBox = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CHART DRAWING";

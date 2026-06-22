@@ -11,7 +11,7 @@
   "IsReadOnly": true,
   "Enabled": true,
   "CreatedDate": "2024-12-14T04:26:30.7071104+07:00",
-  "ModifiedDate": "2025-06-01T20:47:26.5693208+07:00",
+  "ModifiedDate": "2025-08-23T11:41:27.9534686+07:00",
   "ParameterContainer": {
   "DisplayName": null,
   "DisplayParameters": null,
@@ -31,7 +31,7 @@
   "IsReadOnly": false,
   "Enabled": true,
   "CreatedDate": "2024-12-14T04:26:38.3605266+07:00",
-  "ModifiedDate": "2025-06-01T20:47:26.5693208+07:00",
+  "ModifiedDate": "2025-08-23T11:39:52.8289522+07:00",
   "ParameterContainer": {
   "DisplayName": null,
   "DisplayParameters": null,
@@ -46,7 +46,7 @@
   "IsReadOnly": false,
   "Enabled": true,
   "CreatedDate": "2024-12-14T04:26:45.9797621+07:00",
-  "ModifiedDate": "2025-06-01T20:50:49.6164882+07:00",
+  "ModifiedDate": "2025-08-23T11:39:52.8289522+07:00",
   "ParameterContainer": {
   "DisplayName": "S7Ethernet Device Parameter",
   "DisplayParameters": "S7Ethernet Device Parameter",
@@ -264,6 +264,31 @@
   ]
 }
   ]
+},
+    {
+  "Name": "Channel2",
+  "Description": null,
+  "ItemType": "Channel",
+  "IsReadOnly": false,
+  "Enabled": true,
+  "CreatedDate": "2025-08-23T11:40:20.1928288+07:00",
+  "ModifiedDate": "2025-08-23T11:40:20.1928288+07:00",
+  "ParameterContainer": {
+  "DisplayName": null,
+  "DisplayParameters": null,
+  "Parameters": {
+    "Port": "COM1",
+    "ScanRate": "1000",
+    "Baudrate": "9600",
+    "Parity": "None",
+    "StopBits": "One",
+    "DelayBetweenPool": "5",
+    "MaxWritesCount": "10",
+    "DataBits": "8"
+  }
+},
+  "DriverPath": "ModbusRTU",
+  "Childs": []
 }
   ]
 }
